@@ -1,0 +1,19 @@
+node_modules/
+.DS_Store
+*.sqlite
+*.png
+*.jpg
+.env
+.idea
+
+#generated prisma
+src/generated/
+
+
+#pasta das keys 
+keys/
+
+
+# rsa keys
+id_rsa_priv.pem
+id_rsa_pub.pem
