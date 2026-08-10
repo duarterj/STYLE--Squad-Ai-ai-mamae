@@ -35,8 +35,6 @@ model User {
   orderUpdate       Boolean   @default(true)
   newArrival        Boolean   @default(false)
   saleAlert         Boolean   @default(false)
-
-  @@map("users")
 }
 
 enum CategoryType {
