@@ -1,5 +1,17 @@
+import TopBar from "../../components/topBar"
+
 function Home() {
-  return <h1>TT Final</h1>;
+  return(
+    <div>
+      <TopBar/>
+        
+
+
+    </div>
+    
+    )
+
+
 }
 
 export default Home;
