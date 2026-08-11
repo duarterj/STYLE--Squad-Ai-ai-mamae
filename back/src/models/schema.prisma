@@ -36,3 +36,29 @@ model User {
   newArrival        Boolean   @default(false)
   saleAlert         Boolean   @default(false)
 }
+
+enum CategoryType {
+  TOPS
+  BOTTOMS
+  SHOES
+  DRESSES
+  ACCESSORIES
+}
+
+model Product {
+  id          Int          @id @default(autoincrement())
+  name        String
+  brand       String?
+  description String
+  price       Decimal      @db.Decimal(10, 2)
+  salePrice   Decimal?     @db.Decimal(10, 2)
+  pathImage   String?
+  category    CategoryType
+  collection  String?
+  rating      Float        @default(0)
+  ratingCount Int          @default(0)
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+}
