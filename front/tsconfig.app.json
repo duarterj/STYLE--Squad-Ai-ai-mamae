@@ -22,5 +22,14 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  
+  /* shadcn */
+  "baseUrl": ".",
+  "paths": {
+      "@/*": [
+          "./src/*"
+      ]
+  }
+
 }

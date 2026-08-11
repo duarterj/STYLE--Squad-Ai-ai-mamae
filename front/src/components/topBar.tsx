@@ -13,7 +13,7 @@ export default function TopBar(){
             <span className="flex items-center justify-center h-5 text-white text-[14px] bg-[#030711]">Free shipping on orders over $100 | New arrivals daily</span>
 
             {/* div para a barra que contem o icons, link para outras abas e etc*/}
-            <div className="flex p-4 items-center justify-evenly    " >
+            <div className="flex p-4 md:gap-2 items-center justify-evenly ml-69 md:ml-0 md:mr-0 mr-69  " >
                 
                 <div className=" flex flex-row gap-2 font-bold">
                     

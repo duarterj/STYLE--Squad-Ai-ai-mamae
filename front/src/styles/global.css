@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+
 
 @layer base {
       * {
@@ -6,8 +11,16 @@
         padding: 0;
         box-sizing: border-box;
         scroll-behavior: smooth;
+   
       }
 }
+
+@theme{
+
+  /*fontes*/
+  --font-segoe: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+}
+
 
 html,
 body,
