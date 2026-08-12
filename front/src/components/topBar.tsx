@@ -8,7 +8,7 @@ import { Input } from './ui/inputSearch';
 export default function TopBar(){
     return(
 
-        <div className="h-[101px] border-0 border-b-1">
+        <div className="sticky top-0 z-50 h-[101px]  backdrop-blur-xs border-0 border-b-1">
 
             {/* barra no topo */}
             <span className="flex items-center justify-center h-5 text-white text-[14px] bg-[#030711]">Free shipping on orders over $100 | New arrivals daily</span>
@@ -33,7 +33,7 @@ export default function TopBar(){
                 </div>
 
                 {/* barra de pesquisa */}
-                <div className="flex flex-row rounded-[10px] border-solid border-[#e5e7eb]  bg-[#f3f4f6] w-[384px] text-left">
+                <div className="mr-8 flex flex-row rounded-[10px] bg-[#F9FAFB] shadow-[#000000] border-solid border-[#e5e7eb]  bg-[#f3f4f6] w-[384px] text-left">
 
                     <img src={Search} className="ml-2"/>
                     <Input className="  p-2" placeholder="Search for products..."></Input>
@@ -41,11 +41,11 @@ export default function TopBar(){
                 </div>
 
                 {/* icones do final */}
-                <div className="flex flex-row">
+                <div className="flex flex-row align-middle">
 
                     <img src={Heart}/>
 
-                    <span className="flex items-center justify-center  rounded-full h-8 w-8 bg-[#f3f4f6] text-[14px]">JD</span>
+                    <span className="mt-2 flex items-center justify-center  rounded-full h-8 w-8 bg-[#f3f4f6] text-[14px]">JD</span>
 
                     <img src={ShoppingBag}/> 
                 

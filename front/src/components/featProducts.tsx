@@ -8,15 +8,15 @@ import star from "../assets/Icon/star.svg"
 
 export default function FeatProduct() {
   return (
-    <div className="grid grid-cols-1  py-10  sm:grid-cols-2 lg:grid-cols-4 lg:px-[120px]">
+    <div className="grid grid-cols-1  py-10  sm:grid-cols-2 lg:grid-cols-4 lg:px-[245px]">
       {produtosFeat.map((produto, index) => (
         <Card
           key={index}
-          className="relative h-[450px] w-[318px] overflow-hidden rounded-b-[12px]  border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
-        >
+          className="relative h-[450px] w-[318px] overflow-hidden rounded-b-[12px]  border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+
+          
           <div className="absolute inset-0 flex items-start justify-start mt-3 p-5">
             <Badge className={produto.badge === 'Sale' ? 'bg-[#ef4343] text-white' : 'bg-black text-white'}>{produto.badge}</Badge>
-
           </div>
 
           <div className="h-[318px] w-full bg-gray-100 flex  items-center justify-center">
