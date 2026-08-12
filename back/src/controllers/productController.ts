@@ -5,16 +5,7 @@ import { prisma } from "../config/prisma";
 class ProductController {
   public static async createProduct(request: Request, response: Response) {
     try {
-      const {
-        name,
-        brand,
-        description,
-        price,
-        salePrice,
-        pathImage,
-        category,
-        collection,
-      } = request.body;
+      const { name, brand, description, price, salePrice, pathImage, category, collection } = request.body;
 
       const createInput: Prisma.ProductCreateInput = {
         name: name,
@@ -44,6 +35,7 @@ class ProductController {
       const foundProduct = await prisma.product.findUnique({
         where: {
           id: Number(productId),
+          isActive: true,
         },
       });
 
@@ -77,16 +69,7 @@ class ProductController {
 
   public static async updateProduct(request: Request, response: Response) {
     try {
-      const {
-        name,
-        brand,
-        description,
-        price,
-        salePrice,
-        pathImage,
-        category,
-        collection,
-      } = request.body;
+      const { name, brand, description, price, salePrice, pathImage, category, collection, isActive } = request.body;
       const { productId } = request.params;
 
       const updateInput: Prisma.ProductUpdateInput = {
@@ -98,6 +81,7 @@ class ProductController {
         pathImage: pathImage,
         category: category,
         collection: collection,
+        isActive: isActive,
       };
 
       const updatedProduct = await prisma.product.update({
