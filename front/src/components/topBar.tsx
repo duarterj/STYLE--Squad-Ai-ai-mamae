@@ -3,6 +3,7 @@
 import  Heart  from '../assets/Icon/heart.svg';
 import Search from "../assets/Icon/search.svg"
 import  ShoppingBag  from '../assets/Icon/shoppingBag.svg';
+import { Input } from './ui/inputSearch';
 
 export default function TopBar(){
     return(
@@ -18,7 +19,6 @@ export default function TopBar(){
                 <div className=" flex flex-row gap-2 font-bold">
                     
                     <span className="flex items-center justify-center text-[18px] rounded-[12px] h-8 w-8 bg-[#030711] text-white">S</span>
-                    
                     <span className=" text-[20px]"> Style</span>
                 </div>
 
@@ -36,7 +36,7 @@ export default function TopBar(){
                 <div className="flex flex-row rounded-[10px] border-solid border-[#e5e7eb]  bg-[#f3f4f6] w-[384px] text-left">
 
                     <img src={Search} className="ml-2"/>
-                    <input className="p-2" placeholder="Search for products..."></input>
+                    <Input className="  p-2" placeholder="Search for products..."></Input>
 
                 </div>
 

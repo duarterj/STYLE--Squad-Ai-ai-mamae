@@ -29,5 +29,5 @@ body,
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: var(--font-segoe);
 }
