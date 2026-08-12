@@ -3,7 +3,7 @@ import { prisma } from "../config/prisma";
 import { Prisma } from "../generated/prisma/client";
 import auth from '../config/auth';
 
-const excludePassword = {
+const userSelect = {
     id: true,
     firstName: true,
     lastName: true,
@@ -64,7 +64,7 @@ export class UserController {
                 const token = auth.generateJWT(user.id);
                 return res.status(200).json({ token: token });
             } else {
-                return res.status(400).json({ message: "Senha ou email incorretos" });
+                return res.status(401).json({ message: "Senha ou email incorretos" });
             }
         } catch (e: any) {
             return res.status(500).json({ message: e.message });
@@ -73,7 +73,7 @@ export class UserController {
 
     public static async getUsers(req: Request, res: Response) {
         try {
-            const users = await prisma.user.findMany({ select: excludePassword });
+            const users = await prisma.user.findMany({ select: userSelect });
             return res.status(200).json(users);
         } catch (e: any) {
             return res.status(500).json({ message: e.message });
@@ -85,7 +85,7 @@ export class UserController {
             const { id } = req.params;
             const user = await prisma.user.findUnique({
                 where: { id: Number(id) },
-                select: excludePassword
+                select: userSelect
             });
 
             if (!user) {
@@ -120,7 +120,7 @@ export class UserController {
             const updatedUser = await prisma.user.update({
                 data: updateData,
                 where: { id: Number(id) },
-                select: excludePassword
+                select: userSelect
             });
 
             return res.status(200).json(updatedUser);
@@ -144,7 +144,7 @@ export class UserController {
                     newArrival,
                     saleAlert
                 },
-                select: excludePassword
+                select: userSelect
             });
 
             return res.status(200).json(updatedPreferences);

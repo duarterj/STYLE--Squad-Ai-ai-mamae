@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only --no-notify src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "keys": "npx ts-node-dev --transpile-only --no-notify src/config/generateKeyPairs.ts"
   },
   "keywords": [],
   "author": "",
