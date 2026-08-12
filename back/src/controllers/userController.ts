@@ -3,7 +3,22 @@ import { prisma } from "../config/prisma";
 import { Prisma } from "../generated/prisma/client";
 import auth from '../config/auth';
 
-
+const excludePassword = {
+    id: true,
+    firstName: true,
+    lastName: true,
+    email: true,
+    gender: true,
+    phoneNumber: true,
+    dateBirth: true,
+    memberSince: true,
+    emailNotification: true,
+    smsNotification: true,
+    marketingEmail: true,
+    orderUpdate: true,
+    newArrival: true,
+    saleAlert: true,
+}
 
 export class UserController {
 
@@ -58,7 +73,7 @@ export class UserController {
 
     public static async getUsers(req: Request, res: Response) {
         try {
-            const users = await prisma.user.findMany();
+            const users = await prisma.user.findMany({ select: excludePassword });
             return res.status(200).json(users);
         } catch (e: any) {
             return res.status(500).json({ message: e.message });
@@ -68,7 +83,10 @@ export class UserController {
     public static async getUserById(req: Request, res: Response) {
         try {
             const { id } = req.params;
-            const user = await prisma.user.findUnique({ where: { id: Number(id) } });
+            const user = await prisma.user.findUnique({
+                where: { id: Number(id) },
+                select: excludePassword
+            });
 
             if (!user) {
                 return res.status(404).json({ message: "Usuário não encontrado" });
@@ -85,8 +103,12 @@ export class UserController {
             const { firstName, lastName, email, password, gender, phoneNumber, dateBirth } = req.body;
 
             let updateData: Prisma.UserUpdateInput = {
-                firstName, lastName, email, gender, phoneNumber,
-                dateBirth: dateBirth ? new Date(dateBirth) : null,
+                firstName,
+                lastName,
+                email,
+                gender,
+                phoneNumber,
+                ...(dateBirth !== undefined && { dateBirth: new Date(dateBirth) })
             };
 
             if (password) {
@@ -97,7 +119,8 @@ export class UserController {
 
             const updatedUser = await prisma.user.update({
                 data: updateData,
-                where: { id: Number(id) }
+                where: { id: Number(id) },
+                select: excludePassword
             });
 
             return res.status(200).json(updatedUser);
@@ -120,7 +143,8 @@ export class UserController {
                     orderUpdate,
                     newArrival,
                     saleAlert
-                }
+                },
+                select: excludePassword
             });
 
             return res.status(200).json(updatedPreferences);
