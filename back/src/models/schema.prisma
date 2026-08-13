@@ -86,8 +86,8 @@ model WishlistItem {
   userId    Int
   productId Int
   addedAt   DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@id([userId, productId])
 }
@@ -96,8 +96,8 @@ model CartItem {
   userId    Int
   variantId Int
   quantity  Int     @default(1)
-  user      User    @relation(fields: [userId], references: [id])
-  variant   Variant @relation(fields: [variantId], references: [id])
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  variant   Variant @relation(fields: [variantId], references: [id], onDelete: Cascade)
 
   @@id([userId, variantId])
 }
@@ -155,5 +155,5 @@ model OrderItem {
   quantity    Int     @default(1)
   unitPrice   Decimal @db.Decimal(10, 2)
   variant     Variant @relation(fields: [variantId], references: [id])
-  order       Order   @relation(fields: [orderId], references: [id])
+  order       Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
 }
