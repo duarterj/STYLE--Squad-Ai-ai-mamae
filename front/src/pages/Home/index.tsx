@@ -6,12 +6,12 @@ import shipping from "../../assets/Icon/carShipping.svg"
 import retorno from "../../assets/Icon/return.svg"
 import seguro from "../../assets/Icon/secure.svg"
 import view from "../../assets/Icon/viewAll.svg"
-import subscrive from "../../assets/Icon/inscrever.svg"
+import subscribe from "../../assets/Icon/inscrever.svg"
 
 
 import { Button } from "../../components/ui/button";
 import CardCategory from "../../components/cardCategory";
-import FeatProduct from "../../components/featProducts";
+import FeatProduct from "../../components/cardFeatured";
 import { Input } from "../../components/ui/inputSearch";
 
 
@@ -23,7 +23,7 @@ function Home() {
       {/* Hero banner da pagina */}
       <div className="flex items-center justify-center gap-6 flex-col bg-[#F8F8F9]  h-[840px]">
 
-        <h1 className="font-bold text-[72px]">Style Redefined</h1>
+        <h1 className="font-bold bg-linear-to-r from-[#030711] to-[#4C4E56] text-[72px] bg-clip-text text-transparent">Style Redefined</h1>
         <span className="text-[#6b7280] text-[24px] text-center w-[570px]">Discover the latest trends in fashion. Premium quality, sustainable materials, timeless designs.</span>
 
         
@@ -38,6 +38,7 @@ function Home() {
         </div>
       </div>
 
+      {/* icones de vantagens */}
       <div className="flex items-center justify-evenly text-center p-16 flex-row sm:gap-5 sm:ml-0 md:mr-5 " >
 
         <div className="flex flex-col  ">
@@ -97,7 +98,7 @@ function Home() {
         
         <div className="flex flex-row items-center mt-6 gap-5">
           <Input className="bg-white w-[306px] h-[48px]" placeholder="Enter your email"></Input>
-          <Button><img src={subscrive}/></Button>
+          <Button><img src={subscribe}/></Button>
         </div>
 
       </div>

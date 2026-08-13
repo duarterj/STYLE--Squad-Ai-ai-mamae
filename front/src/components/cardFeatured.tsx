@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card} from "@/components/ui/card"
-import  { produtosFeat } from "./featHome"
+import  { produtosFeat } from "./componentsData/featuredData"
 
 import broken from "../assets/Icon/categoryBroke.svg"
 import star from "../assets/Icon/star.svg"
@@ -12,7 +12,7 @@ export default function FeatProduct() {
       {produtosFeat.map((produto, index) => (
         <Card
           key={index}
-          className="relative h-[450px] w-[318px] overflow-hidden rounded-b-[12px]  border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+          className="relative h-[450px] w-[318px] overflow-hidden rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
 
           
           <div className="absolute inset-0 flex items-start justify-start mt-3 p-5">
@@ -26,7 +26,7 @@ export default function FeatProduct() {
           <div className="relative flex h-full flex-col  -mt-5 justify-between p-3">
             <div>
               <h3 className="text-lg font-semibold text-left">{produto.name}</h3>
-              <div className="flex items-center gap-3 mt-2">
+              <div className="flex items-center gap-1 mt-2">
                 <img src={star}/>
                 <span className="text-sm font-medium">{produto.rate}</span>
                 <span className="text-sm text-gray-500">({produto.reviews})</span>
