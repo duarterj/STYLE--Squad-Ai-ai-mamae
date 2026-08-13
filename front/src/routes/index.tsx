@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import MegaSale from "../pages/megaSale";
+import Login from "../pages/Login";
 
 function AppRoutes() {
   return (
@@ -8,6 +9,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/megaSale" element={<MegaSale/>} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
