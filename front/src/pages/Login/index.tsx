@@ -1,5 +1,7 @@
 import { useState, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import TopBar from "../../components/topBar";
+import { login } from "../../services/auth";
 
 function MailIcon() {
     return (
@@ -139,6 +141,8 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    const navigate = useNavigate();
+
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
@@ -146,7 +150,11 @@ export default function Login() {
         setError(null);
 
         try {
-            console.log("login", email, password);
+            const response = await login(email, password);
+
+            localStorage.setItem("token", response.data.token);
+
+            navigate("/");
         } catch {
             setError("Invalid email or password.");
         } finally {
@@ -159,7 +167,6 @@ export default function Login() {
             <TopBar />
 
             <div className="min-h-screen w-full bg-[linear-gradient(135deg,rgba(243,244,246,0.30)_0%,rgba(243,244,246,0.10)_100%)] flex flex-col items-center justify-center px-6 py-10">
-                
                 <div className="flex w-full max-w-md flex-col items-start gap-8">
 
                     <div className="flex w-full flex-col items-center text-center">
@@ -242,7 +249,9 @@ export default function Login() {
                                         id="email"
                                         type="email"
                                         value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
                                         placeholder="Enter your email"
                                         className="min-w-0 flex-1 text-sm text-slate-900 placeholder-slate-400 focus:outline-none"
                                         required
@@ -274,9 +283,15 @@ export default function Login() {
 
                                     <input
                                         id="password"
-                                        type={showPassword ? "text" : "password"}
+                                        type={
+                                            showPassword
+                                                ? "text"
+                                                : "password"
+                                        }
                                         value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
                                         placeholder="Enter your password"
                                         className="min-w-0 flex-1 text-sm text-[#030711] placeholder-slate-400 focus:outline-none"
                                         required
@@ -284,7 +299,9 @@ export default function Login() {
 
                                     <button
                                         type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
+                                        onClick={() =>
+                                            setShowPassword(!showPassword)
+                                        }
                                         className="shrink-0"
                                     >
                                         <EyeIcon open={showPassword} />
@@ -304,7 +321,9 @@ export default function Login() {
                                 disabled={loading}
                                 className="w-full rounded-lg bg-[#030711] py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 disabled:opacity-60"
                             >
-                                {loading ? "Signing in..." : "Sign In"}
+                                {loading
+                                    ? "Signing in..."
+                                    : "Sign In"}
                             </button>
 
                         </form>

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import TopBar from "../../components/topBar";
+import { register } from "../../services/auth";
 
 function MailIcon() {
     return (
@@ -201,13 +202,12 @@ export default function Cadastro() {
         setLoading(true);
 
         try {
-            console.log({
+            await register(
                 firstName,
                 lastName,
                 email,
-                password,
-                subscribe,
-            });
+                password
+            );
         } catch {
             setError("Unable to create your account.");
         } finally {
@@ -432,7 +432,7 @@ export default function Cadastro() {
                                             setConfirmPassword(e.target.value)
                                         }
                                         placeholder="Confirm your password"
-                                        className="min-w-0 flex-1 text-sm text-[#030711] placeholder-slate-400 focus:outline-none"
+                                        className="min-w-0 flex-1 text-sm text-slate-900 placeholder-slate-400 focus:outline-none"
                                         required
                                     />
 
@@ -463,13 +463,15 @@ export default function Cadastro() {
                                     <input
                                         type="checkbox"
                                         checked={agreeTerms}
-                                        onChange={(e) => setAgreeTerms(e.target.checked)}
+                                        onChange={(e) =>
+                                            setAgreeTerms(e.target.checked)
+                                        }
                                         className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded-full border border-slate-300 accent-[#030711]"
                                         required
                                     />
 
                                     <span className="text-sm leading-5 text-slate-500">
-                                        I agree to the{" "}
+                                        I agree to{" "}
                                         <a
                                             href="/termos"
                                             className="font-medium text-[#030711] hover:underline"
@@ -490,7 +492,9 @@ export default function Cadastro() {
                                     <input
                                         type="checkbox"
                                         checked={subscribe}
-                                        onChange={(e) => setSubscribe(e.target.checked)}
+                                        onChange={(e) =>
+                                            setSubscribe(e.target.checked)
+                                        }
                                         className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded-full border border-slate-300 accent-[#030711]"
                                     />
 
