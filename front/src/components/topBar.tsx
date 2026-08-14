@@ -77,8 +77,9 @@ export default function TopBar() {
                     </div>
                 </div>
             </div>
-
-            <div className="flex md:hidden flex-col">
+            
+            {/* so afeta em tela pequena */}
+            <div className=" flex md:hidden flex-col">
 
                 {/* barra no topo */}
                 <span className="flex h-5 items-center justify-center bg-[#030711] px-2 text-center text-[10px] text-white">

@@ -10,11 +10,11 @@ import fav from "../assets/Icon/favButton.svg"
 
 export default function SaleItems() {
   return (
-    <div className="grid grid-cols-1  gap-4 sm:grid-cols-1 lg:grid-cols-3">
+    <div className="grid  grid-cols-1 ml-4 gap-4 sm:grid-cols-1 lg:grid-cols-3">
       {produtosSale.map((produto, index) => (
         <Card
           key={index}
-          className="relative h-[526px] w-[344px] overflow-hidden rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+          className="relative h-[540px] sm:h-[526px] w-[358px] sm:w-[344px] rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
 
           
           <div className="absolute inset-0 flex items-start justify-start  p-2">
