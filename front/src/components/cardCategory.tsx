@@ -4,11 +4,11 @@ import Categorias, { categorias } from "./componentsData/categoryData"
 
 export default function CardCategory() {
   return (
-    <div className="grid grid-cols-1   py-10  sm:grid-cols-1  lg:grid-cols-4 lg:px-[276px] sm:items-center">
+    <div className="grid grid-cols-1 gap-6 px-4  py-10  lg:grid-cols-4 lg:px-[276px]     ">
       {categorias.map((categoria, index) => (
         <Card
           key={index}
-          className="relative h-[324px] w-[324px] overflow-hidden rounded-[32px] border-none bg-transparent text-white shadow-[0_30px_60px_#0f172a1e] transition-transform sm:mb-10 duration-300 hover:-translate-y-1 hover:shadow-2xl"
+          className="relative h-[358px] w-[358px] sm:h-[324px] sm:w-[324px] overflow-hidden rounded-[12px] border-none bg-transparent text-white shadow-[0_30px_60px_#0f172a1e] transition-transform sm:mb-10 duration-300 hover:-translate-y-1 hover:shadow-2xl"
         >
           <div className="absolute inset-0">
             <img
