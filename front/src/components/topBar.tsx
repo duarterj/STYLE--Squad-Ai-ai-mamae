@@ -1,7 +1,10 @@
-import Heart from "../assets/Icon/heart.svg";
-import Search from "../assets/Icon/search.svg";
-import ShoppingBag from "../assets/Icon/shoppingBag.svg";
-import { Input } from "./ui/inputSearch";
+// import { Input } from "../components/input"
+
+import { NavLink } from 'react-router-dom';
+import  Heart  from '../assets/Icon/heart.svg';
+import Search from "../assets/Icon/search.svg"
+import  ShoppingBag  from '../assets/Icon/shoppingBag.svg';
+import { Input } from './ui/inputSearch';
 
 export default function TopBar() {
     return (
@@ -17,27 +20,22 @@ export default function TopBar() {
                     </span>
 
                     {/* div para a barra que contem o icons, link para outras abas e etc*/}
-                    <div className="flex p-4 md:gap-2 items-center justify-evenly ml-69 md:ml-0 md:mr-0 mr-69">
-
-                        <div className="flex flex-row gap-2 font-bold">
-
-                            <span className="flex items-center justify-center text-[18px] rounded-[12px] h-8 w-8 bg-[#030711] text-white">
-                                S
-                            </span>
-
-                            <span className="text-[20px]">
-                                Style
-                            </span>
-
-                        </div>
+                    <div className="flex p-4 md:gap-2 items-center justify-evenly ml-69 md:ml-0 md:mr-0 mr-69  " >
+                
+                        
+                        <NavLink to="/" className=" flex flex-row gap-2 font-bold">
+                            <span className="flex items-center justify-center text-[18px] rounded-[12px] h-8 w-8 bg-[#030711] text-white">S</span>
+                            <span className=" text-[20px]"> Style</span>
+                        </NavLink>
+                        
 
                         {/* link das outra abas */}
                         <div className="font-[rgba(3, 7, 17, 0.8)] gap-8 flex items-start text-[14px] text-left">
 
-                            <span>New in</span>
-                            <span>Women</span>
-                            <span>Men</span>
-                            <span>Sale</span>
+                            <text>New in</text>
+                            <text>Women</text>
+                            <text>Men</text>
+                            <NavLink to="/megaSale">Sale</NavLink> {/*navega para megaSale */}
 
                         </div>
 
@@ -79,8 +77,9 @@ export default function TopBar() {
                     </div>
                 </div>
             </div>
-
-            <div className="flex md:hidden flex-col">
+            
+            {/* so afeta em tela pequena */}
+            <div className=" flex md:hidden flex-col">
 
                 {/* barra no topo */}
                 <span className="flex h-5 items-center justify-center bg-[#030711] px-2 text-center text-[10px] text-white">

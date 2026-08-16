@@ -18,7 +18,7 @@
 @theme{
 
   /*fontes*/
-  --font-segoe: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  --font-segoe: "Segoe UI", system-ui, sans-serif;
 }
 
 
@@ -29,5 +29,5 @@ body,
 }
 
 body {
-  font-family: var(--font-segoe);
+  @apply font-segoe;
 }

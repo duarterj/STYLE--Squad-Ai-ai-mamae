@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
+import MegaSale from "../pages/megaSale";
 import Login from "../pages/Login";
 import Cadastro from "../pages/Cadastro";
 import Termos from "../pages/Termos";
@@ -10,6 +11,7 @@ function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/megaSale" element={<MegaSale/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/termos" element={<Termos />} />
