@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { UserController } from "../controllers/userController";
 import { ProductController } from "../controllers/productController";
+import { VariantController } from "../controllers/variantController";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
 import { validateRequestBodyData, UserValidator } from "../validate/userValidator";
 
@@ -23,5 +24,13 @@ router.get("/product/:productId", ProductController.getProductById);
 router.get("/products", ProductController.getProducts);
 router.put("/product/:productId", ProductController.updateProduct);
 router.delete("/product/:productId", ProductController.softDeleteProduct);
+
+// ############################## VARIANT ROUTES
+
+router.post("/variant", VariantController.createVariant);
+router.get("/variant/:variantId", VariantController.getVariantById);
+router.get("/variants", VariantController.getVariants);
+router.put("/variant/:variantId", VariantController.updateVariant);
+router.delete("/variant/:variantId", VariantController.deleteVariant);
 
 export { router };
