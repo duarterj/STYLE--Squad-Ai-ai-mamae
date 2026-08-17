@@ -16,6 +16,18 @@ class VariantController {
         },
       };
 
+      const product = await prisma.product.findUnique({
+        where: {
+        id: Number(productId),
+        },
+      });
+
+      if (!product) {
+        return response.status(404).json({
+          message: "Produto não encontrado",
+        });
+      }
+
       const createdVariant = await prisma.variant.create({
         data: createInput,
       });
