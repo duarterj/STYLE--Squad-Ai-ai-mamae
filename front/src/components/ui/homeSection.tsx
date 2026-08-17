@@ -1,5 +1,3 @@
-import TopBar from "../../components/topBar"
-
 import shopNow from "../../assets/Icon/buttonShop.svg"
 import collection from "../../assets/Icon/collection.svg"
 import shipping from "../../assets/Icon/carShipping.svg"
@@ -9,18 +7,16 @@ import view from "../../assets/Icon/viewAll.svg"
 import subscribe from "../../assets/Icon/inscrever.svg"
 
 
-import { Button } from "../../components/ui/button";
-import CardCategory from "../../components/cardCategory";
-import FeatProduct from "../../components/cardFeatured";
-import { Input } from "../../components/ui/inputSearch";
+import { Button } from "./button";
+import CardCategory from "../ui/cardCategory";
+import FeatProduct from "../ui/cardFeatured";
+import { Input } from "./inputSearch";
 
-
-function Home() {
-  return(
-    <div className="">
-      {/* gerencia a page em tela grande */}
+export default function HomeSection(){
+    return(
+        <>
+           {/* gerencia a page em tela grande */}
       <div className="hidden  md:block">
-        <TopBar/>
 
         {/* Hero banner da pagina */}
         <div className="flex items-center justify-center gap-6 flex-col bg-[#F8F8F9]  h-[840px]">
@@ -108,7 +104,7 @@ function Home() {
 
       {/* gerencia a page em tela pequena */}
       <div className=" md:hidden ">
-        <TopBar/>
+        
 
         {/* Hero banner da pagina */}
         <div className="flex items-center justify-center gap-6 flex-col bg-[#F8F8F9]  h-[840px]">
@@ -192,13 +188,7 @@ function Home() {
           </div>
 
         </div>
-      </div>
-
-    </div>
-    
+      </div> 
+        </>
     )
-
-
 }
-
-export default Home;

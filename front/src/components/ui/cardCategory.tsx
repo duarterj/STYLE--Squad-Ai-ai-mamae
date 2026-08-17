@@ -1,6 +1,6 @@
-import { Card } from "../components/ui/card"
-import broken from "../assets/Icon/categoryBroke.svg"
-import Categorias, { categorias } from "./componentsData/categoryData"
+import { Card } from "./card"
+import broken from "../../assets/Icon/categoryBroke.svg"
+import Categorias, { categorias } from "../componentsData/categoryData"
 
 export default function CardCategory() {
   return (

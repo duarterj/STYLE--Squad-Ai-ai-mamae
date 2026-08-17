@@ -1,12 +1,12 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card} from "@/components/ui/card"
-import  { produtosSale } from "./componentsData/saleData"
+import  { produtosSale } from "../componentsData/saleData"
 
-import broken from "../assets/Icon/categoryBroke.svg"
-import star from "../assets/Icon/star.svg"
-import add from "../assets/Icon/addCart.svg"
-import fav from "../assets/Icon/favButton.svg"
+import broken from "../../assets/Icon/categoryBroke.svg"
+import star from "../../assets/Icon/star.svg"
+import add from "../../assets/Icon/addCart.svg"
+import fav from "../../assets/Icon/favButton.svg"
 
 export default function SaleItems() {
   return (

@@ -1,7 +1,7 @@
-import { sizes } from "./componentsData/sizesData";
-import { Checkbox } from "./ui/checkbox";
-import { Field, FieldGroup } from "./ui/field";
-import { Label } from "./ui/label";
+import { sizes } from "../componentsData/sizesData";
+import { Checkbox } from "./checkbox";
+import { Field, FieldGroup } from "./field";
+import { Label } from "./label";
 
 
 

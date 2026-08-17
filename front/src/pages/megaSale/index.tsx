@@ -1,4 +1,4 @@
-import TopBar from "../../components/topBar"
+import TopBar from "../../components/ui/topBar"
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/inputSearch";
 import { Checkbox } from "../../components/ui/checkbox";
@@ -15,8 +15,8 @@ import lista from "../../assets/Icon/list.svg"
 import filter from"../../assets/Icon/filter.svg"
 import loadMore from "../../assets/Icon/loadMore.svg"
 
-import SizeCheck from "../../components/sizeCheck";
-import SaleItems from "../../components/cardSale";
+import SizeCheck from "../../components/ui/sizeCheck";
+import SaleItems from "../../components/ui/cardSale";
 
 
 export default function MegaSale(){

@@ -1,12 +1,14 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card} from "@/components/ui/card"
-import  { produtosFeat } from "./componentsData/featuredData"
+import  { produtosFeat } from "../componentsData/featuredData"
 
-import broken from "../assets/Icon/categoryBroke.svg"
-import star from "../assets/Icon/star.svg"
+import broken from "../../assets/Icon/categoryBroke.svg"
+import star from "../../assets/Icon/star.svg"
 
 export default function FeatProduct() {
+  
+
   return (
     <div className="grid grid-cols-1 gap-8 px-4  py-10  lg:grid-cols-4 lg:px-[245px]">
       {produtosFeat.map((produto, index) => (
