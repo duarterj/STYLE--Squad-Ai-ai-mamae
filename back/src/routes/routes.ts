@@ -13,9 +13,13 @@ router.post("/users", validateRequestBodyData(UserValidator.createUser), UserCon
 router.post("/users/login", UserController.login);
 router.get("/users", AuthMiddleware.execute, UserController.getUsers);
 router.get("/users/:id", AuthMiddleware.execute, UserController.getUserById);
-router.put("/users/:id",AuthMiddleware.execute,validateRequestBodyData(UserValidator.updateUser),UserController.updateUser);
-router.patch("/users/:id/preferences",AuthMiddleware.execute,validateRequestBodyData(UserValidator.updateUser),UserController.updatePreferences);
+router.put("/users/:id", AuthMiddleware.execute, validateRequestBodyData(UserValidator.updateUser), UserController.updateUser);
+router.patch("/users/:id/preferences", AuthMiddleware.execute, validateRequestBodyData(UserValidator.updateUser), UserController.updatePreferences);
 router.delete("/users/:id", AuthMiddleware.execute, UserController.deleteUser);
+//WISHLIST ROUTES
+router.post('/users/:id/wishlist', AuthMiddleware.execute, UserController.addProdutoWishlist);
+router.get('/users/:id/wishlist', AuthMiddleware.execute, UserController.getWishlist);
+router.delete('/users/:id/wishlist/:productId', AuthMiddleware.execute, UserController.removeProdutoWishlist);
 
 // ############################## PRODUCT ROUTES
 
