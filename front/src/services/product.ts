@@ -1,0 +1,26 @@
+import api from "./api";
+
+export interface Product {
+  id: string | number;
+  name: string;
+  price: number;
+  salePrice?: string;
+  pathImage: string;
+  category: string;
+  rate : string;
+  review: string;
+}
+
+
+export  const getProducts = async() => {
+  try {
+    const response = await api.get("/products");
+    return response;
+  } catch(error: unknown) {
+    throw new Error(
+        error instanceof Error ? error.message : "error getting the product"
+    );
+  };
+   
+};
+
