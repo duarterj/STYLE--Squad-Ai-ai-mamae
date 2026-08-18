@@ -162,4 +162,62 @@ export class UserController {
             return res.status(500).json({ message: e.message });
         }
     }
+
+    public static async addProdutoWishlist(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+            const { productId } = req.body;
+
+            const wishlistItem = await prisma.wishlistItem.create({
+                data: {
+                    userId: Number(id),
+                    productId: Number(productId)
+                }
+            });
+
+            return res.status(201).json({ message: "Produto adicionado à lista de desejos", wishlistItem });
+        } catch (e: any) {
+            if (e.code === 'P2002') {
+                return res.status(400).json({ message: "Este produto já está na sua lista de desejos." });
+            }
+            return res.status(500).json({ message: e.message });
+        }
+    }
+
+    public static async getWishlist(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+
+            const wishlist = await prisma.wishlistItem.findMany({
+                where: { userId: Number(id) },
+                include: {
+                    product: true
+                }
+            });
+
+            return res.status(200).json(wishlist);
+        } catch (e: any) {
+            return res.status(500).json({ message: e.message });
+        }
+    }
+
+    public static async removeProdutoWishlist(req: Request, res: Response) {
+        try {
+            const { id, productId } = req.params;
+
+            await prisma.wishlistItem.delete({
+                where: {
+
+                    userId_productId: {
+                        userId: Number(id),
+                        productId: Number(productId)
+                    }
+                }
+            });
+
+            return res.status(204).send();
+        } catch (e: any) {
+            return res.status(500).json({ message: e.message });
+        }
+    }
 }
