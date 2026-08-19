@@ -15,7 +15,7 @@ export default function FeatProduct() {
     const fetchProdutos = async () => {
       try {
         const response = await getProducts()
-        setProdutos(response.data || response) 
+        setProdutos([...(response.data || response)].reverse())  
       } catch (err: unknown) {
         setError("Erro ao carregar produtos.")
       } finally {
@@ -42,9 +42,9 @@ export default function FeatProduct() {
           className="relative h-[490px] w-[358px] sm:h-[450px] sm:w-[318px] overflow-hidden rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
 
           
-          <div className="absolute inset-0 flex items-start justify-start mt-3 p-5">
-           <Badge className={produto.collection ?  'bg-black text-white': 'bg-[#ef4343] text-white'}>
-              {produto.collection ?  produto.collection :'Sale' }
+          <div className="absolute inset-0 flex items-start justify-start p-2">
+           <Badge className={ produto.collection === 'Sale' ?  'bg-[#ef4343] text-white':'bg-black text-white'}>
+              {produto.collection  }
             </Badge>
           </div>
 
@@ -52,7 +52,7 @@ export default function FeatProduct() {
             <img 
               src={produto.pathImage} 
               alt={produto.name} 
-              className="sm:h-[318px] h-[358px] w-[358px] object-contain" />
+              className="text-center sm:h-[318px] h-[358px] w-[358px] object-contain" />
           </div>
 
           <div className="relative flex h-full flex-col  sm:-mt-5 justify-between p-3">

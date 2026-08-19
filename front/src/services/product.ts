@@ -2,7 +2,7 @@ import api from "./api";
 
 export interface Product {
   id: string | number;
-  description: string;
+  description?: string;
   name: string;
   price: number;
   salePrice?: string;

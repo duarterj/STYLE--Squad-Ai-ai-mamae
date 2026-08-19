@@ -1,8 +1,8 @@
 export const produtosFeat = [
-  { "name": "Vintage Denim Jacket", "price": "$89", "salePrice": "$120", "rate": "4.8", "review": 124, "category": "Best Seller"},
-  { name: "Oversized Blazer", price: "$145", salePrice: "", rate: "4.9", reviews: 89, category: "New" },
-  { name: "Comfort Slim Jeans", price: "$79", salePrice: "$99", rate: "4.7", reviews: 203, category: "Sale" },
-  { name: "Silk Blouse", price: "$125", salePrice: "",  rate: "4.8", reviews: 156, category: "Premium" },
+  { "name": "Vintage Denim Jacket","description": "", "price": "89", "salePrice": "120", "rating": "4.8", "review": 124, "category": "TOPS", "collection": "Best Seller"},
+  { "name": "Oversized Blazer","description": "",  "price": "145", "rating": "4.9", "ratingCount": 89, "category":"TOPS", "collection": "New" },
+  { "name": "Comfort Slim Jeans","description": "",  "price": "79", "salePrice": "99", "rating": "4.7", "ratingCount": 203, "category":"BOTTOMS", "collection": "Sale" },
+  { "name": "Silk Blouse","description": "",  "price": "125",  "rating": "4.8", "ratingCount": 156, "category":"DRESSES", "collection": "Premium" },
 ]
 
 
