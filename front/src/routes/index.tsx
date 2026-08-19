@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Cadastro from "../pages/Cadastro";
 import Termos from "../pages/Termos";
 import Privacidade from "../pages/Privacidade";
+import Wishlist from "../pages/Wishlist";
 
 function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ function AppRoutes() {
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/termos" element={<Termos />} />
         <Route path="/privacidade" element={<Privacidade />} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
     </BrowserRouter>
   );

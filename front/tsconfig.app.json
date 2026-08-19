@@ -20,16 +20,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src"],
-  
-  /* shadcn */
-  "baseUrl": ".",
-  "paths": {
-      "@/*": [
-          "./src/*"
-      ]
-  }
+    "noFallthroughCasesInSwitch": true,
 
+    /* shadcn */
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src"]
 }
