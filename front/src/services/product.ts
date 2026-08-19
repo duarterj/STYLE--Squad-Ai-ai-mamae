@@ -2,13 +2,15 @@ import api from "./api";
 
 export interface Product {
   id: string | number;
+  description: string;
   name: string;
   price: number;
   salePrice?: string;
   pathImage: string;
   category: string;
-  rate : string;
-  review: string;
+  collection: string;
+  rating : number;
+  ratingCount:  number;
 }
 
 

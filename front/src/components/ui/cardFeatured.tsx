@@ -43,8 +43,8 @@ export default function FeatProduct() {
 
           
           <div className="absolute inset-0 flex items-start justify-start mt-3 p-5">
-           <Badge className={produto.salePrice ? 'bg-[#ef4343] text-white' : 'bg-black text-white'}>
-              {produto.salePrice ? 'Sale' : produto.category}
+           <Badge className={produto.collection ?  'bg-black text-white': 'bg-[#ef4343] text-white'}>
+              {produto.collection ?  produto.collection :'Sale' }
             </Badge>
           </div>
 
@@ -60,8 +60,8 @@ export default function FeatProduct() {
               <h3 className="text-lg font-semibold text-left">{produto.name}</h3>
               <div className="flex items-center gap-1 mt-2">
                 <img src={star} alt="Star rating"/>
-                <span className="text-sm font-medium">{produto.rate}</span>
-                <span className="text-sm text-gray-500">({produto.review})</span>
+                <span className="text-sm font-medium">{produto.rating}</span>
+                <span className="text-sm text-gray-500">({produto.ratingCount})</span>
               </div>
             </div>
 
