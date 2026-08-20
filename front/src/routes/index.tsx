@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
+import Home from "../components/ui";
 import MegaSale from "../pages/megaSale";
 import Login from "../pages/Login";
 import Cadastro from "../pages/Cadastro";

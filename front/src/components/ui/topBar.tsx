@@ -1,10 +1,10 @@
 // import { Input } from "../components/input"
 
 import { NavLink } from 'react-router-dom';
-import Heart from '../assets/Icon/heart.svg';
-import Search from "../assets/Icon/search.svg"
-import ShoppingBag from '../assets/Icon/shoppingBag.svg';
-import { Input } from './ui/inputSearch';
+import  Heart  from '../../assets/Icon/heart.svg';
+import Search from "../../assets/Icon/search.svg"
+import  ShoppingBag  from '../../assets/Icon/shoppingBag.svg';
+import { Input } from './inputSearch';
 
 export default function TopBar() {
     return (

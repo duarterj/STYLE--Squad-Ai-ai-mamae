@@ -1,4 +1,4 @@
-import TopBar from "../../components/topBar"
+import TopBar from "../../components/ui/topBar"
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/inputSearch";
 import { Checkbox } from "../../components/ui/checkbox";
@@ -15,8 +15,8 @@ import lista from "../../assets/Icon/list.svg"
 import filter from"../../assets/Icon/filter.svg"
 import loadMore from "../../assets/Icon/loadMore.svg"
 
-import SizeCheck from "../../components/sizeCheck";
-import SaleItems from "../../components/cardSale";
+import SizeCheck from "../../components/ui/sizeCheck";
+import SaleItems from "../../components/ui/cardSale";
 
 
 export default function MegaSale(){
@@ -81,7 +81,7 @@ export default function MegaSale(){
                         <h1 className="mt-6 text-[16px] font-semibold">Category</h1>
 
                         {/* seção de categorias */}
-                        <FieldGroup className="flex  gap-2">
+                        <FieldGroup className="cursor-pointer flex  gap-2">
 
                             <Field orientation="horizontal" className="h-4 w-4">
                                 <Checkbox className="rounded-full"> </Checkbox>
@@ -142,7 +142,7 @@ export default function MegaSale(){
                         </div>
                         
                         <SaleItems/>
-                        <Button className="mb-5"><img src={loadMore}/></Button>
+                        <Button className="cursor-pointer mb-5"><img src={loadMore}/></Button>
 
                     </section>
                 </div>
@@ -157,7 +157,7 @@ export default function MegaSale(){
                     
                     <div className="flex flex-row items-center mt-6 gap-5">
                         <Input className="bg-white w-[306px] h-[48px]" placeholder="Enter your email"></Input>
-                        <Button><img src={subscribe}/></Button>
+                        <Button className="cursor-pointer"><img src={subscribe}/></Button>
                     </div>
 
             </div>
@@ -287,7 +287,7 @@ export default function MegaSale(){
                         </div>
                         
                         <SaleItems/>
-                        <Button className=" mb-5"><img src={loadMore}/></Button>
+                        <Button className="cursor-pointer mb-5"><img src={loadMore}/></Button>
 
                     </section>
                 </div>
@@ -301,8 +301,8 @@ export default function MegaSale(){
                     </div>
                     
                     <div className="flex flex-col items-center mt-6 gap-5">
-                        <Input className="bg-white w-[306px] h-[48px]" placeholder="Enter your email"></Input>
-                        <Button><img src={subscribe}/></Button>
+                        <Input className="bg-white w-[358.44px] h-[48px]" placeholder="Enter your email"></Input>
+                        <Button className="cursor-pointer font-semibold bg-white border-none h-12 w-[358.44px]">Subscribe</Button>
                     </div>
                 </div>
             </div>

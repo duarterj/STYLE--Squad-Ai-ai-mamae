@@ -1,4 +1,4 @@
-import TopBar from "../../components/topBar";
+import TopBar from "../../components/ui/topBar";
 import WishlistSections from "../../components/wishlistSection";
 
 

@@ -1,12 +1,12 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card} from "@/components/ui/card"
-import  { produtosSale } from "./componentsData/saleData"
+import  { produtosSale } from "../componentsData/saleData"
 
-import broken from "../assets/Icon/categoryBroke.svg"
-import star from "../assets/Icon/star.svg"
-import add from "../assets/Icon/addCart.svg"
-import fav from "../assets/Icon/favButton.svg"
+import broken from "../../assets/Icon/categoryBroke.svg"
+import star from "../../assets/Icon/star.svg"
+import add from "../../assets/Icon/addCart.svg"
+import fav from "../../assets/Icon/favButton.svg"
 
 export default function SaleItems() {
   return (
@@ -14,7 +14,7 @@ export default function SaleItems() {
       {produtosSale.map((produto, index) => (
         <Card
           key={index}
-          className="relative h-[540px] sm:h-[526px] w-[358px] sm:w-[344px] rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+          className="relative h-[540px]  w-[358px] sm:h-[526px] sm:w-[344px] rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
 
           
           <div className="absolute inset-0 flex items-start justify-start  p-2">
@@ -25,8 +25,8 @@ export default function SaleItems() {
             <Badge className="bg-[#F3F4F6] ">{produto.badgeT}</Badge>
           </div>
 
-          <div className="h-[344px] w-full bg-gray-100 flex   items-center justify-center">
-            <img src={broken} alt={produto.name} className="h-[344px] w-[344px] object-contain " />
+          <div className="h-[344px] w-full  flex   items-center justify-center">
+            <img src={broken} alt={produto.name} className="sm:h-[344px] h-[358px] w-full object-contain " />
           </div>
 
           <div className="relative flex h-full flex-col  -mt-5 justify-between p-3">
@@ -50,8 +50,8 @@ export default function SaleItems() {
               </div>
             </div>
 
-            <div className="flex flec-row -ml-5">
-                <Button ><img src={add} className="w-[264px] -mr-2" /></Button>
+            <div className="flex flec-row  -ml-5">
+                <Button ><img src={add} className="w-[264px] -mr-2 cursor-pointer" /></Button>
                 <Button ><img src={fav}/></Button>
             </div>
 
