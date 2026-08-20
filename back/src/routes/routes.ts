@@ -4,6 +4,7 @@ import { ProductController } from "../controllers/productController";
 import { VariantController } from "../controllers/variantController";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
 import { validateRequestBodyData, UserValidator } from "../validate/userValidator";
+import { WishlistItemController } from '../controllers/wishListController';
 
 const router = Router();
 
@@ -16,10 +17,12 @@ router.get("/users/:id", AuthMiddleware.execute, UserController.getUserById);
 router.put("/users/:id", AuthMiddleware.execute, validateRequestBodyData(UserValidator.updateUser), UserController.updateUser);
 router.patch("/users/:id/preferences", AuthMiddleware.execute, validateRequestBodyData(UserValidator.updateUser), UserController.updatePreferences);
 router.delete("/users/:id", AuthMiddleware.execute, UserController.deleteUser);
-//WISHLIST ROUTES
-router.post('/users/:id/wishlist', AuthMiddleware.execute, UserController.addProdutoWishlist);
-router.get('/users/:id/wishlist', AuthMiddleware.execute, UserController.getWishlist);
-router.delete('/users/:id/wishlist/:productId', AuthMiddleware.execute, UserController.removeProdutoWishlist);
+
+// ##############################  WISHLIST ROUTES
+
+router.post('/users/:id/wishlist', AuthMiddleware.execute, WishlistItemController.addProductWishlist);
+router.get('/users/:id/wishlist', AuthMiddleware.execute, WishlistItemController.getWishlist);
+router.delete('/users/:id/wishlist/:productId', AuthMiddleware.execute, WishlistItemController.removeProductWishlist);
 
 // ############################## PRODUCT ROUTES
 
