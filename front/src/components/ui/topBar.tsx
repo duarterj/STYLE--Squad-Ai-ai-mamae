@@ -58,10 +58,15 @@ export default function TopBar() {
                         {/* icones do final */}
                         <div className="flex flex-row align-middle">
 
-                            <img
-                                src={Heart}
-                                alt="Favorites"
-                            />
+                            <NavLink
+                                to="/wishlist"
+                                className="flex items-center"
+                            >
+                                <img
+                                    src={Heart}
+                                    alt="Favorites"
+                                />
+                            </NavLink>
 
                             <span className="mt-2 flex items-center justify-center rounded-full h-8 w-8 bg-[#f3f4f6] text-[14px]">
                                 JD
@@ -123,10 +128,15 @@ export default function TopBar() {
                             />
                         </button>
 
-                        <img
-                            src={Heart}
-                            alt="Favorites"
-                        />
+                        <NavLink
+                            to="/wishlist"
+                            className="flex items-center"
+                        >
+                            <img
+                                src={Heart}
+                                alt="Favorites"
+                            />
+                        </NavLink>
 
                         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f3f4f6] text-[14px]">
                             JD
