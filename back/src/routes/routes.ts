@@ -5,6 +5,7 @@ import { VariantController } from "../controllers/variantController";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
 import { validateRequestBodyData, UserValidator } from "../validate/userValidator";
 import { WishlistItemController } from '../controllers/wishListController';
+import { photoUpload } from "../config/multer";
 
 const router = Router();
 
@@ -26,10 +27,10 @@ router.delete('/users/:id/wishlist/:productId', AuthMiddleware.execute, Wishlist
 
 // ############################## PRODUCT ROUTES
 
-router.post("/product", ProductController.createProduct);
+router.post("/product", photoUpload.single("image"), ProductController.createProduct);
 router.get("/product/:productId", ProductController.getProductById);
 router.get("/products", ProductController.getProducts);
-router.put("/product/:productId", ProductController.updateProduct);
+router.put("/product/:productId", photoUpload.single("image"), ProductController.updateProduct);
 router.delete("/product/:productId", ProductController.softDeleteProduct);
 
 // ############################## VARIANT ROUTES
@@ -41,3 +42,6 @@ router.put("/variant/:variantId", VariantController.updateVariant);
 router.delete("/variant/:variantId", VariantController.deleteVariant);
 
 export { router };
+
+
+
