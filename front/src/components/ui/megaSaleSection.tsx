@@ -58,7 +58,7 @@ export default function MegaSaleSection(){
 
 
                 {/* seção dos produtos em promoção */}
-                <div className="flex items-center justify-center">
+                <div className="ml-[276px]">
                     <SaleItems/>
                 </div>
 
