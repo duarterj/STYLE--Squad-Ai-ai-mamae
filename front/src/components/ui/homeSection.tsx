@@ -11,11 +11,12 @@ import { Button } from "./button";
 import CardCategory from "../ui/cardCategory";
 import FeatProduct from "../ui/cardFeatured";
 import { Input } from "./inputSearch";
+import { NavLink } from "react-router-dom";
 
 export default function HomeSection(){
-    return(
-        <>
-           {/* gerencia a page em tela grande */}
+  return(
+    <>
+      {/* gerencia a page em tela grande */}
       <div className="hidden  md:block">
 
         {/* Hero banner da pagina */}
@@ -24,15 +25,14 @@ export default function HomeSection(){
           <h1 className="font-bold bg-linear-to-r from-[#030711] to-[#4C4E56] text-[72px] bg-clip-text text-transparent">Style Redefined</h1>
           <span className="text-[#6b7280] text-[24px] text-center w-[570px]">Discover the latest trends in fashion. Premium quality, sustainable materials, timeless designs.</span>
 
-          
-          <div className="flex cursor-pointer flex-row gap-4">
-            
-            <Button>
-              <img src={shopNow}/>
-            </Button>
+          <div className="flex  flex-row gap-4">
+            <NavLink to="/megaSale" >
+              <Button className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl"><img src={shopNow}/></Button>
+            </NavLink>
 
-            <Button><img src={collection}/></Button>
-
+            <NavLink to="/megasale">
+              <Button  className=" cursor-pointer hover:-translate-y-1 hover:shadow-2xl" ><img src={collection}/></Button>
+            </NavLink>
           </div>
         </div>
 
@@ -84,7 +84,7 @@ export default function HomeSection(){
         
         {/* div feito para centralizar o button */}
         <div className="flex items-center justify-center mb-20 mt-10">
-          <Button><img src={view} /></Button>
+          <Button className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl"><img src={view} /></Button>
         </div>
 
           {/* footer da pagina */}
@@ -96,7 +96,7 @@ export default function HomeSection(){
           
           <div className="flex flex-row items-center mt-6 gap-5">
             <Input className="bg-white w-[306px] h-[48px]" placeholder="Enter your email"></Input>
-            <Button><img src={subscribe}/></Button>
+            <Button className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl"><img src={subscribe}/></Button>
           </div>
 
         </div>
@@ -113,14 +113,14 @@ export default function HomeSection(){
           <span className="text-[#6b7280] text-[20px] text-center w-[343px]">Discover the latest trends in fashion. Premium quality, sustainable materials, timeless designs.</span>
 
           
-          <div className="flex cursor-pointer flex-col h-[48px] gap-6">
-            
-            <Button>
-              <img src={shopNow} className=""/>
-            </Button>
+          <div className="flex  flex-col h-1 gap-6">
+            <NavLink to="/megaSale">
+              <Button className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl"><img src={shopNow}/></Button>
+            </NavLink>
 
-            <Button><img src={collection}/></Button>
-
+            <NavLink to="/megasale">
+              <Button className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl"><img src={collection} /></Button>
+            </NavLink>
           </div>
         </div>
 
@@ -146,9 +146,6 @@ export default function HomeSection(){
             <span className="text-[#6b7280] text-[16px]">Your payment information is safe</span>
           </div>
 
-
-
-
         </div>
         
         {/* titulo dos card de categorias */}
@@ -157,9 +154,7 @@ export default function HomeSection(){
           <p className="text-[#6b7280] text-[20px]">Explore our carefully curated collections for every style and occasion</p>
         </div>
 
-        
         <CardCategory/>
-        
 
         {/* titulo dos card de produtos da home */}
         <div className="flex flex-col mt-[160px] mb-16 gap-4 text-center">
@@ -172,7 +167,7 @@ export default function HomeSection(){
         
         {/* div feito para centralizar o button */}
         <div className="cursor-pointer flex items-center justify-center mb-20 mt-10">
-          <Button className="cursor-pointer"><img src={view} /></Button>
+          <Button className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl"><img src={view} /></Button>
         </div>
 
           {/* footer da pagina */}
@@ -184,11 +179,11 @@ export default function HomeSection(){
           
           <div className="flex flex-col items-center mt-6 gap-4">
             <Input className="bg-white w-[358.44px] h-[48px]" placeholder="Enter your email"></Input>
-            <Button className="cursor-pointer bg-white border-none h-12 w-[358.44px]">Subscribe</Button>
+            <Button className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl bg-white border-none h-12 w-[358.44px]">Subscribe</Button>
           </div>
 
         </div>
       </div> 
-        </>
-    )
+    </>
+  )
 }
