@@ -1,21 +1,12 @@
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/inputSearch";
-import { Checkbox } from "../../components/ui/checkbox";
-import { Field, FieldGroup } from "../../components/ui/field";
-import { Label } from "../../components/ui/label";
+
 
 import subscribe from "../../assets/Icon/inscrever.svg"
 import freeShiping from "../../assets/Icon/freeShiping.svg"
 import offMembers from "../../assets/Icon/extraforMembers.svg"
-import price from "../../assets/Icon/combobox.svg"
-import feat from "../../assets/Icon/combobox2.svg"
-import grade from "../../assets/Icon/grid.svg"
-import lista from "../../assets/Icon/list.svg"
-import filter from"../../assets/Icon/filter.svg"
-import loadMore from "../../assets/Icon/loadMore.svg"
 
-import SizeCheck from "../../components/ui/sizeCheck";
-import SaleItems from "../../components/ui/cardSale";
+import SaleItems from "./saleItemsSection";
 
 export default function MegaSaleSection(){
     return(
@@ -67,75 +58,8 @@ export default function MegaSaleSection(){
 
 
                 {/* seção dos produtos em promoção */}
-                <div className="flex flex-row gap-8 ">
-
-                    {/* seção para check com filtros */}
-                    <section className=" flex flex-col ml-[276px] w-[256px] gap-6 h-[1248px]">
-
-                        <h1 className="mt-6 text-[16px] font-semibold">Category</h1>
-
-                        {/* seção de categorias */}
-                        <FieldGroup className="cursor-pointer flex  gap-2">
-
-                            <Field orientation="horizontal" className="h-4 w-4">
-                                <Checkbox className="rounded-full"> </Checkbox>
-                                <Label>Tops</Label>
-                            </Field>
-
-                            <Field orientation="horizontal" className="h-4 w-4">
-                                <Checkbox className="rounded-full"> </Checkbox>
-                                <Label>Bottoms</Label>
-                            </Field>
-
-                            <Field orientation="horizontal" className="h-4 w-4">
-                                <Checkbox className="rounded-full"> </Checkbox>
-                                <Label>Dresses</Label>
-                            </Field>
-
-                            <Field orientation="horizontal" className="h-4 w-4">
-                                <Checkbox className="rounded-full"> </Checkbox>
-                                <Label>Shoes</Label>
-                            </Field>
-
-                            <Field orientation="horizontal" className="h-4 w-4">
-                                <Checkbox className="rounded-full"> </Checkbox>
-                                <Label>Accessories</Label>
-                            </Field>
-                        </FieldGroup>
-
-                        {/* seção de tamanhos */}
-                        <h1 className="text-[16px] font-semibold">Sizes</h1>
-                        <SizeCheck/>
-
-                        {/* seção de preço */}
-                        <h1 className="mt-6 text-[16px] font-semibold">Price range</h1>
-                        <img src={price}/>
-
-                    </section>
-                    
-                    {/* seção para os produtos */}
-                    <section className="flex flex-col gap-6 w-[1080px]">
-
-                        {/* header da seção de items */}
-                        <div className="flex flex-row">
-
-                            <div className="flex flex-col">
-                                <h1 className="text-2xl font-semibold">Sale Items</h1>  
-                                <span className="text-[#6B7280] text-[16px]">6 products found</span>
-                            </div>
-
-                            <div className="flex flex-row items-end ml-auto max-w-full">
-                                <img src={feat} className="mr-4 "/>
-                                <img src={grade} className="mr-1 "/>
-                                <img src={lista}/>
-                            </div>
-
-                        </div>
-                        
-                        <SaleItems/>
-                        <Button className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl mb-5"><img src={loadMore}/></Button>
-
-                    </section>
+                <div className="flex items-center justify-center">
+                    <SaleItems/>
                 </div>
 
 
@@ -199,80 +123,7 @@ export default function MegaSaleSection(){
                 </div>
 
                 {/* seção dos produtos em promoção */}
-                <div className="flex flex-col gap-8 ">
-
-                    {/* seção para check com filtros */}
-                    <section className=" flex flex-col ml-4 w-[256px] gap-4 h-[548px]">
-
-                        <div className="flex items-end flex-row">
-                            <img src={filter} className="h-5"/>
-                            <h1 className="mt-2 text-[16px] font-semibold">Filters</h1>
-                        </div>
-
-                        <h1 className="mt-2 text-[16px] font-semibold">Category</h1>
-
-                        {/* seção de categorias */}
-                        <FieldGroup className="flex  gap-2">
-
-                            <Field orientation="horizontal" className="h-4 w-4">
-                                <Checkbox className="rounded-full"> </Checkbox>
-                                <Label>Tops</Label>
-                            </Field>
-
-                            <Field orientation="horizontal" className="h-4 w-4">
-                                <Checkbox className="rounded-full"> </Checkbox>
-                                <Label>Bottoms</Label>
-                            </Field>
-
-                            <Field orientation="horizontal" className="h-4 w-4">
-                                <Checkbox className="rounded-full"> </Checkbox>
-                                <Label>Dresses</Label>
-                            </Field>
-
-                            <Field orientation="horizontal" className="h-4 w-4">
-                                <Checkbox className="rounded-full"> </Checkbox>
-                                <Label>Shoes</Label>
-                            </Field>
-
-                            <Field orientation="horizontal" className="h-4 w-4">
-                                <Checkbox className="rounded-full"> </Checkbox>
-                                <Label>Accessories</Label>
-                            </Field>
-                        </FieldGroup>
-
-                        {/* seção de tamanhos */}
-                        <h1 className="text-[16px] font-semibold">Sizes</h1>
-                        <SizeCheck/>
-
-                        {/* seção de preço */}
-                        <h1 className="mt-6 text-[16px] font-semibold">Price range</h1>
-                        <img src={price}/>
-                    </section>
-                    
-                    {/* seção para os produtos */}
-                    <section className="flex flex-col gap-6 ">
-
-                        {/* header da seção de items */}
-                        <div className="flex flex-col">
-
-                            <div className="flex ml-4  flex-col">
-                                <h1 className="text-2xl font-semibold">Sale Items</h1>  
-                                <span className="text-[#6B7280] text-[16px]">6 products found</span>
-                            </div>
-
-                            <div className="flex flex-row mt-2">
-                                <img src={feat} className="mr-4 "/>
-                                <img src={grade} className="mr-1 "/>
-                                <img src={lista}/>
-                            </div>
-
-                        </div>
-                        
-                        <SaleItems/>
-                        <Button className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl mb-5"><img src={loadMore}/></Button>
-
-                    </section>
-                </div>
+                <SaleItems/>
 
 
                 {/* footer da pagina */}
