@@ -5,11 +5,16 @@ import { getProducts, type Product } from "../../services/product"
 
 import star from "../../assets/Icon/star.svg"
 import { useEffect, useState } from "react";
+import { usePagination } from "@/hooks/userPagination";
 
 export default function FeatProduct() {
   const [produtos, setProdutos] = useState<Product[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+  const itemsPerPage = 4;
+  const totalPages = Math.ceil(produtos.length / itemsPerPage);
+  const { page, goNext } = usePagination(Math.max(totalPages - 1, 0));
+  const produtosVisiveis = produtos.slice(0, (page + 1) * itemsPerPage);
 
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -36,7 +41,7 @@ export default function FeatProduct() {
   
   return (
     <div className="grid grid-cols-1 gap-8 px-4  py-10  lg:grid-cols-4 lg:px-[245px]">
-      {produtos.map((produto, index) => (
+      {produtosVisiveis.map((produto, index) => (
         <Card
           key={index}
           className="relative h-[490px] w-[358px] sm:h-[450px] sm:w-[318px] overflow-hidden rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">

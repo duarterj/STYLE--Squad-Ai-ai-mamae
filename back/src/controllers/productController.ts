@@ -58,6 +58,7 @@ class ProductController {
           ...(category && { category: category as Prisma.EnumCategoryTypeFilter }),
           isActive: isActive !== undefined ? isActive === "true" : true,
         },
+        
         orderBy: { createdAt: "desc" },
       });
 

@@ -11,6 +11,11 @@ export interface Product {
   collection: string;
   rating : number;
   ratingCount:  number;
+  size?: string;
+  badgeD?: string;
+  badgeT?: string;
+  badgeS?: string;
+  variants?: { size: string }[];
 }
 
 

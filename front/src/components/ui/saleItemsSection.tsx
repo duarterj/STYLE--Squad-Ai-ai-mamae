@@ -1,9 +1,8 @@
-﻿import { useState } from "react"
+﻿import { useEffect, useState } from "react"
 import { Checkbox } from "./checkbox";
 import { Label } from "./label";
 import { Field, FieldGroup } from "./field";
 import { sizes } from "../componentsData/sizesData";
-import { produtosSale } from "../componentsData/saleData"
 
 import filter from "../../assets/Icon/filter.svg"
 import price from "../../assets/Icon/combobox.svg"
@@ -11,18 +10,39 @@ import feat from "../../assets/Icon/combobox2.svg"
 import grade from "../../assets/Icon/grid.svg"
 import lista from "../../assets/Icon/list.svg"
 
+
 import SizeCheck from "./sizeCheck";
 import CardMegaSale from "./cardMegaSale";
+import { getProducts, type Product } from "@/services/product";
+
 
 export default function SaleItems() {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState<string | null>(null);
   const [tamanhoSelecionado, setTamanhoSelecionado] = useState("");
+  const [produtos, setProdutos] = useState<Product[]>([]);
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
 
-  function filtroCategoria(categoria: string, checked: boolean | "indeterminate") {
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      try {
+        const response = await getProducts()
+        setProdutos([...(response.data || response)].reverse())  
+      } catch (err: unknown) {
+        setError("Erro ao carregar produtos.")
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProdutos()
+  }, [])
+
+  function filtroCategoria(category: string, checked: boolean | "indeterminate") {
     const estaMarcado = checked === true;
 
     if (estaMarcado) {
-      setCategoriaSelecionada(categoria);
+      setCategoriaSelecionada(category);
       return;
     }
 
@@ -41,9 +61,11 @@ export default function SaleItems() {
     setTamanhoSelecionado("");
   }
 
-  const produtosFiltrados = produtosSale.filter((produto) => {
-    const passaCategoria = !categoriaSelecionada || produto.categoria?.toLowerCase() === categoriaSelecionada.toLowerCase();
-    const passaTamanho = !tamanhoSelecionado || produto.size?.toUpperCase() === tamanhoSelecionado.toUpperCase();
+  const produtosFiltrados = produtos.filter((produto) => {
+    const passaCategoria = !categoriaSelecionada || produto.category?.toLowerCase() === categoriaSelecionada.toLowerCase();
+    const passaTamanho = !tamanhoSelecionado || produto.size?.toUpperCase() === tamanhoSelecionado.toUpperCase() || produto.variants?.some(
+      (variant) => variant.size.toUpperCase() === tamanhoSelecionado.toUpperCase(),
+    );
 
     return passaCategoria && passaTamanho;
   });
@@ -135,7 +157,12 @@ export default function SaleItems() {
           </div>
         </div>
 
-        <CardMegaSale produtos={produtosFiltrados} />
+        
+        {loading && <div className="text-center py-10">Carregando produtos...</div>}
+        {error && <div className="text-center py-10 text-red-500">{error}</div>}
+        <CardMegaSale produtos={loading || error ? [] : produtosFiltrados} />
+        
+
       </section>
     </div>
   );
