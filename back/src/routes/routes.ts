@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { UserController } from "../controllers/userController";
 import { ProductController } from "../controllers/productController";
 import { VariantController } from "../controllers/variantController";
@@ -8,6 +8,8 @@ import { WishlistItemController } from '../controllers/wishListController';
 import { photoUpload } from "../config/multer";
 
 const router = Router();
+
+
 
 // ############################## USER ROUTES
 
@@ -27,10 +29,19 @@ router.delete('/users/:id/wishlist/:productId', AuthMiddleware.execute, Wishlist
 
 // ############################## PRODUCT ROUTES
 
-router.post("/product", photoUpload.single("image"), ProductController.createProduct);
+// captura o erro do fileFilter do multer e retorna 415 com mensagem clara
+function uploadImage(request: Request, response: Response, next: NextFunction) {
+  photoUpload.single("image")(request, response, (error: any) => {
+    if (error) {
+      return response.status(415).json({ message: "Formato de imagem não suportado" });
+    }
+    next();
+  });
+}
+router.post("/product", uploadImage, ProductController.createProduct);
 router.get("/product/:productId", ProductController.getProductById);
 router.get("/products", ProductController.getProducts);
-router.put("/product/:productId", photoUpload.single("image"), ProductController.updateProduct);
+router.put("/product/:productId", uploadImage, ProductController.updateProduct);
 router.delete("/product/:productId", ProductController.softDeleteProduct);
 
 // ############################## VARIANT ROUTES
@@ -42,6 +53,4 @@ router.put("/variant/:variantId", VariantController.updateVariant);
 router.delete("/variant/:variantId", VariantController.deleteVariant);
 
 export { router };
-
-
 
