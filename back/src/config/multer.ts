@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 const photoUpload = multer({
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024 * 50,
+    fileSize: 1024 * 1024 * 5,
     files: 9,
   },
   fileFilter: function (request: Request, file, callBack) {
