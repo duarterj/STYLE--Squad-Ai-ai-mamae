@@ -13,7 +13,7 @@ export default function FeatProduct() {
   const [error, setError] = useState<string | null>(null)
   const itemsPerPage = 4;
   const totalPages = Math.ceil(produtos.length / itemsPerPage);
-  const { page, goNext } = usePagination(Math.max(totalPages - 1, 0));
+  const { page } = usePagination(Math.max(totalPages - 1, 0));
   const produtosVisiveis = produtos.slice(0, (page + 1) * itemsPerPage);
 
   useEffect(() => {
@@ -72,9 +72,9 @@ export default function FeatProduct() {
 
             <div className="flex items-center justify-between">
               <div className="flex items-baseline gap-3">
-                <span className="text-xl font-bold">R$ {produto.price}</span>
+                <span className="text-xl font-bold">${produto.price}</span>
                 {produto.salePrice ? (
-                  <span className="text-sm text-gray-400 line-through">R$ {produto.salePrice}</span>
+                  <span className="text-sm text-gray-400 line-through">${produto.salePrice}</span>
                 ) : null}
               </div>
               <Button className="cursor-pointer bg-white text-black border border-gray-200">Add to Cart</Button>

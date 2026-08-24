@@ -12,15 +12,14 @@ import loadMore from "../../assets/Icon/loadMore.svg"
 
 type CardMegaSaleProps = {
   produtos: Product[];
-  idInicial?: number;
 };
 
-export default function CardMegaSale({ produtos, idInicial = 15 }: CardMegaSaleProps) {
-  const produtosAPartirDoId = produtos.filter((produto) => Number(produto.id) >= idInicial);
+export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
+  const produtosMegaSale = produtos.filter((produto) => produto.salePrice != null);
   const itemsPerPage = 6;
-  const totalPages = Math.ceil(produtosAPartirDoId.length / itemsPerPage);
+  const totalPages = Math.ceil(produtosMegaSale.length / itemsPerPage);
   const { page, goNext } = usePagination(Math.max(totalPages - 1, 0));
-  const produtosVisiveis = produtosAPartirDoId.slice(0, (page + 1) * itemsPerPage);
+  const produtosVisiveis = produtosMegaSale.slice(0, (page + 1) * itemsPerPage);
   
 
   return (
@@ -29,8 +28,8 @@ export default function CardMegaSale({ produtos, idInicial = 15 }: CardMegaSaleP
         <div className="grid grid-cols-1 ml-4 gap-6 sm:grid-cols-1 lg:grid-cols-3">
           {produtosVisiveis.map((produto) => (
             (() => {
-              const precoAtual = Number(produto.price);
-              const precoAntigo = Number(produto.salePrice);
+              const precoAtual = Number(produto.salePrice);
+              const precoAntigo = Number(produto.price);
               const total = Math.round(precoAntigo - precoAtual);
               const desconto = Math.round(((precoAtual / precoAntigo) *100 ) -100 )
 
@@ -56,7 +55,7 @@ export default function CardMegaSale({ produtos, idInicial = 15 }: CardMegaSaleP
                   <div className="absolute inset-0 flex justify-start p-4">
                     <Badge className="bg-white border-[#E5E7EB] ">{produto.category}</Badge>
                   </div>
-                  <div className="flex items-start justify-end gap-1 mt-2">
+                  <div className="flex items-center justify-end gap-1 mt-2">
                     <img src={star} />
                     <span className="text-sm font-medium">{produto.rating}</span>
                     <span className="text-sm text-gray-500">({produto.ratingCount})</span>
@@ -66,8 +65,8 @@ export default function CardMegaSale({ produtos, idInicial = 15 }: CardMegaSaleP
                 
                 <div className="flex items-center justify-between">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xl text-[#DC2626] font-bold">${produto.price}</span>
-                    <span className="text-sm text-gray-400 line-through">${produto.salePrice}</span>
+                    <span className="text-xl text-[#DC2626] font-bold">${produto.salePrice}</span>
+                    <span className="text-sm text-gray-400 line-through">${produto.price}</span>
                     <Badge className="bg-[#EF4343] text-white">Save ${total}</Badge>
                   </div>
                 </div>
@@ -92,7 +91,7 @@ export default function CardMegaSale({ produtos, idInicial = 15 }: CardMegaSaleP
           <Button
             className="w-[195px] cursor-pointer hover:-translate-y-1 hover:shadow-2xl mb-5"
             onClick={goNext}
-            disabled={produtosVisiveis.length >= produtosAPartirDoId.length}
+            disabled={produtosVisiveis.length >= produtosMegaSale.length}
           >
             <img src={loadMore} />
           </Button>

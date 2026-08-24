@@ -66,8 +66,9 @@ export default function SaleItems() {
     const passaTamanho = !tamanhoSelecionado || produto.size?.toUpperCase() === tamanhoSelecionado.toUpperCase() || produto.variants?.some(
       (variant) => variant.size.toUpperCase() === tamanhoSelecionado.toUpperCase(),
     );
+    const passaId = produto.salePrice != null;
 
-    return passaCategoria && passaTamanho;
+    return passaCategoria && passaTamanho && passaId;
   });
 
   return (
