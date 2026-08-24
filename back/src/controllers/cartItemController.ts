@@ -12,8 +12,13 @@ export class CartItemController {
                 return res.status(400).json({ message: "A quantidade deve ser maior que zero." });
             }
 
-            const variantExist = await prisma.variant.findUnique({ where: { id: Number(variantId) } });
-            if (!variantExist) {
+            const userExists = await prisma.user.findUnique({ where: { id: Number(id) } });
+            if (!userExists) {
+                return res.status(404).json({ message: "Usuário não encontrado." });
+            }
+
+            const variantExists = await prisma.variant.findUnique({ where: { id: Number(variantId) } });
+            if (!variantExists) {
                 return res.status(404).json({ message: "Variante não encontrado." });
             }
 
@@ -24,16 +29,27 @@ export class CartItemController {
             });
 
             if (existingCartItem) {
+
+                const newQuantity = existingCartItem.quantity + quantity;
+
+                if (newQuantity > variantExists.stock) {
+                    return res.status(400).json({ message: "A Quantidade solicitada ultrapassou o estoque disponível." });
+                }
+
                 const updatedItem = await prisma.cartItem.update({
                     where: {
                         userId_variantId: { userId: Number(id), variantId: Number(variantId) }
                     },
                     data: {
-                        quantity: existingCartItem.quantity + quantity
+                        quantity: newQuantity
                     }
                 });
                 return res.status(200).json({ message: "Quantidade atualizada no carrinho", cartItem: updatedItem });
             } else {
+                if (quantity > variantExists.stock) {
+                    return res.status(400).json({ message: "A Quantidade solicitada ultrapassou o estoque disponível." });
+                }
+
                 const newItem = await prisma.cartItem.create({
                     data: {
                         userId: Number(id),
@@ -41,7 +57,7 @@ export class CartItemController {
                         quantity: quantity
                     }
                 });
-                return res.status(201).json({ message: "Item adicionado ao carrinho", cartItem: newItem });
+                return res.status(201).json({ message: "Item adicionado com sucesso ao carrinho!", cartItem: newItem });
             }
         } catch (e: any) {
             return res.status(500).json({ message: e.message });
@@ -83,6 +99,23 @@ export class CartItemController {
                 return res.status(400).json({ message: "A quantidade deve ser maior que zero." });
             }
 
+            const cartItem = await prisma.cartItem.findUnique({
+                where: {
+                    userId_variantId: { userId: Number(id), variantId: Number(variantId) }
+                },
+                include: {
+                    variant: true
+                }
+            });
+
+            if (!cartItem) {
+                return res.status(404).json({ message: "Item não encontrado no carrinho." });
+            }
+
+            if (quantity > cartItem.variant.stock) {
+                return res.status(400).json({ message: "A Quantidade solicitada ultrapassou o estoque disponível." });
+            }
+
             const updatedItem = await prisma.cartItem.update({
                 where: {
                     userId_variantId: { userId: Number(id), variantId: Number(variantId) }
@@ -90,11 +123,8 @@ export class CartItemController {
                 data: { quantity }
             });
 
-            return res.status(200).json({ message: "Quantidade alterada com sucesso", cartItem: updatedItem });
+            return res.status(200).json({ message: "Quantidade alterada com sucesso!", cartItem: updatedItem });
         } catch (e: any) {
-            if (e.code === 'P2025') {
-                return res.status(404).json({ message: "Item não encontrado no carrinho." });
-            }
             return res.status(500).json({ message: e.message });
         }
     }
