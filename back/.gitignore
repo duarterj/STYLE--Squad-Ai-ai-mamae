@@ -6,6 +6,11 @@ node_modules/
 .env
 .idea
 
+
+#pasta uploads do multer
+uploads/photos/*
+!uploads/photos/.gitkeep
+
 #generated prisma
 src/generated/
 
