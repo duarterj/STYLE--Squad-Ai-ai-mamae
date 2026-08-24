@@ -2,10 +2,10 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card} from "@/components/ui/card"
 import { getProducts, type Product } from "../../services/product"
-
-import star from "../../assets/Icon/star.svg"
 import { useEffect, useState } from "react";
 import { usePagination } from "@/hooks/userPagination";
+
+import star from "../../assets/Icon/star.svg"
 
 export default function FeatProduct() {
   const [produtos, setProdutos] = useState<Product[]>([])

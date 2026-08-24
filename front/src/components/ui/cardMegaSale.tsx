@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import type { Product } from "@/services/product";
+import { type Product } from "@/services/product";
 import { usePagination } from '../../hooks/userPagination';
 
 import broken from "../../assets/Icon/categoryBroke.svg"
@@ -21,6 +21,7 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
   const { page, goNext } = usePagination(Math.max(totalPages - 1, 0));
   const produtosVisiveis = produtosMegaSale.slice(0, (page + 1) * itemsPerPage);
   
+  
 
   return (
     <>
@@ -32,12 +33,12 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
               const precoAntigo = Number(produto.price);
               const total = Math.round(precoAntigo - precoAtual);
               const desconto = Math.round(((precoAtual / precoAntigo) *100 ) -100 )
-
               return (
             <Card
               key={produto.id}
               className="relative h-[540px] w-[358px] sm:h-[526px] sm:w-[344px] rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
+
               <div className="absolute inset-0 flex items-start justify-start p-2">
                 <Badge className="bg-[#DC2626] text-white">{desconto}%</Badge>
               </div>
@@ -71,13 +72,14 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
                   </div>
                 </div>
 
-                <div className="flex flex-row -ml-5">
-                  <Button>
+                <div className="flex flex-row -ml-5 cursor-pointer">
+                        
+                  <Button className="cursor-pointer" >
                     <img src={add} className="w-[264px] -mr-2 cursor-pointer" />
                   </Button>
                   <Button>
                     <img src={fav} />
-                  </Button>
+                  </Button>                 
                 </div>
               </div>
             </Card>
@@ -95,6 +97,7 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
           >
             <img src={loadMore} />
           </Button>
+          
       </div>
     </>
   )

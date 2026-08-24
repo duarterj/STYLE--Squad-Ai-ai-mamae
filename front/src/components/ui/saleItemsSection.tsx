@@ -63,8 +63,8 @@ export default function SaleItems() {
 
   const produtosFiltrados = produtos.filter((produto) => {
     const passaCategoria = !categoriaSelecionada || produto.category?.toLowerCase() === categoriaSelecionada.toLowerCase();
-    const passaTamanho = !tamanhoSelecionado || produto.size?.toUpperCase() === tamanhoSelecionado.toUpperCase() || produto.variants?.some(
-      (variant) => variant.size.toUpperCase() === tamanhoSelecionado.toUpperCase(),
+    const passaTamanho = !tamanhoSelecionado || produto.variants?.some(
+      (variant) => String(variant.size ?? "").toUpperCase() === tamanhoSelecionado.toUpperCase(),
     );
     const passaId = produto.salePrice != null;
 
