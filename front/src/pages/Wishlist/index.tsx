@@ -1,5 +1,5 @@
 import TopBar from "../../components/ui/topBar";
-import WishlistSections from "../../components/wishlistSection";
+import WishlistSections from "../../components/ui/wishlistSection";
 
 
 export default function Wishlist() {
