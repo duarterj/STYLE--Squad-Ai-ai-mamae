@@ -12,12 +12,8 @@ export class CartItemController {
                 return res.status(400).json({ message: "A quantidade deve ser maior que zero." });
             }
 
-            const userExist = await prisma.user.findUnique({ where: { id: Number(id) } });
-            if (!userExist) {
-                return res.status(404).json({ message: "Usuário não encontrado." });
-            }
-            const variantExist = await prisma.user.findUnique({ where: { id: Number(variantId) } });
-            if (!userExist) {
+            const variantExist = await prisma.variant.findUnique({ where: { id: Number(variantId) } });
+            if (!variantExist) {
                 return res.status(404).json({ message: "Variante não encontrado." });
             }
 
