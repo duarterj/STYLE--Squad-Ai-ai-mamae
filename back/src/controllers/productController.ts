@@ -37,7 +37,11 @@ class ProductController {
           id: Number(productId),
           isActive: true,
         },
+      include: {
+        variants: true,
+      },
       });
+     
 
       if (!foundProduct) {
         return response.status(404).json({ message: "Produto não encontrado" });
@@ -58,7 +62,9 @@ class ProductController {
           ...(category && { category: category as Prisma.EnumCategoryTypeFilter }),
           isActive: isActive !== undefined ? isActive === "true" : true,
         },
-        
+      include: {
+        variants: true,
+      },
         orderBy: { createdAt: "desc" },
       });
 
