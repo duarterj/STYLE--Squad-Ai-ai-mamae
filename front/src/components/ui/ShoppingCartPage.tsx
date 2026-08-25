@@ -95,7 +95,7 @@ function ItemThumbnail({
 
             {imagePath ? (
                 <img
-                    src={`http://localhost:3333/uploads/photos/${imagePath}`}
+                    src={`http://localhost:3333/uploads/${imagePath}`}
                     alt="product"
                     className={`h-full w-full object-cover ${outOfStock ? 'opacity-50' : ''
                         }`}
