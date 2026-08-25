@@ -5,6 +5,7 @@ import { VariantController } from "../controllers/variantController";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
 import { validateRequestBodyData, UserValidator } from "../validate/userValidator";
 import { WishlistItemController } from '../controllers/wishListController';
+import { CartItemController } from '../controllers/cartItemController';
 import { uploadImage } from "../middlewares/uploadImageMiddleware";
 
 const router = Router();
@@ -26,6 +27,12 @@ router.delete("/users/:id", AuthMiddleware.execute, UserController.deleteUser);
 router.post('/users/:id/wishlist', AuthMiddleware.execute, WishlistItemController.addProductWishlist);
 router.get('/users/:id/wishlist', AuthMiddleware.execute, WishlistItemController.getWishlist);
 router.delete('/users/:id/wishlist/:productId', AuthMiddleware.execute, WishlistItemController.removeProductWishlist);
+
+// ############################## CARTITEM ROUTES
+router.get('/users/:id/cart', AuthMiddleware.execute, CartItemController.getCart);
+router.post('/users/:id/cart', AuthMiddleware.execute, CartItemController.addToCart);
+router.patch('/users/:id/cart/:variantId', AuthMiddleware.execute, CartItemController.updateCartQuantity);
+router.delete('/users/:id/cart/:variantId', AuthMiddleware.execute, CartItemController.removeFromCart);
 
 // ############################## PRODUCT ROUTES
 
