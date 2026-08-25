@@ -1,9 +1,9 @@
 // import { Input } from "../components/input"
 
 import { NavLink } from 'react-router-dom';
-import  Heart  from '../../assets/Icon/heart.svg';
+import Heart from '../../assets/Icon/heart.svg';
 import Search from "../../assets/Icon/search.svg"
-import  ShoppingBag  from '../../assets/Icon/shoppingBag.svg';
+import ShoppingBag from '../../assets/Icon/shoppingBag.svg';
 import { Input } from './inputSearch';
 
 export default function TopBar() {
@@ -21,13 +21,13 @@ export default function TopBar() {
 
                     {/* div para a barra que contem o icons, link para outras abas e etc*/}
                     <div className="flex p-4 md:gap-2 items-center justify-evenly ml-69 md:ml-0 md:mr-0 mr-69  " >
-                
-                        
+
+
                         <NavLink to="/" className=" flex flex-row gap-2 font-bold">
                             <span className="flex items-center justify-center text-[18px] rounded-[12px] h-8 w-8 bg-[#030711] text-white">S</span>
                             <span className=" text-[20px]"> Style</span>
                         </NavLink>
-                        
+
 
                         {/* link das outra abas */}
                         <div className="font-[rgba(3, 7, 17, 0.8)] gap-8 flex items-start text-[14px] text-left">
@@ -72,17 +72,19 @@ export default function TopBar() {
                                 JD
                             </span>
 
-                            <img
-                                src={ShoppingBag}
-                                alt="Shopping bag"
-                            />
+                            <NavLink to="/carrinho" className="flex items-center">
+                                <img
+                                    src={ShoppingBag}
+                                    alt="Shopping bag"
+                                />
+                            </NavLink>
 
                         </div>
 
                     </div>
                 </div>
             </div>
-            
+
             {/* so afeta em tela pequena */}
             <div className=" flex md:hidden flex-col">
 
@@ -142,10 +144,12 @@ export default function TopBar() {
                             JD
                         </span>
 
-                        <img
-                            src={ShoppingBag}
-                            alt="Shopping bag"
-                        />
+                        <NavLink to="/carrinho" className="flex items-center">
+                            <img
+                                src={ShoppingBag}
+                                alt="Shopping bag"
+                            />
+                        </NavLink>
 
                     </div>
 
