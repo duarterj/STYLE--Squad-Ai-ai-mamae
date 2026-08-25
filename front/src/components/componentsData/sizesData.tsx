@@ -1,6 +1,3 @@
-import { Checkbox } from "../ui/checkbox";
-import { Field, FieldGroup } from "../ui/field";
-import { Label } from "../ui/label";
 
 export const sizes = [
   { size: "XS" },

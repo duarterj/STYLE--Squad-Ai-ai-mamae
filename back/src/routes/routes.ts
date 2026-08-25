@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router} from "express";
 import { UserController } from "../controllers/userController";
 import { ProductController } from "../controllers/productController";
 import { VariantController } from "../controllers/variantController";
@@ -6,8 +6,11 @@ import { AuthMiddleware } from "../middlewares/auth.middleware";
 import { validateRequestBodyData, UserValidator } from "../validate/userValidator";
 import { WishlistItemController } from '../controllers/wishListController';
 import { CartItemController } from '../controllers/cartItemController';
+import { uploadImage } from "../middlewares/uploadImageMiddleware";
 
 const router = Router();
+
+
 
 // ############################## USER ROUTES
 
@@ -33,10 +36,10 @@ router.delete('/users/:id/cart/:variantId', AuthMiddleware.execute, CartItemCont
 
 // ############################## PRODUCT ROUTES
 
-router.post("/product", ProductController.createProduct);
+router.post("/product", uploadImage, ProductController.createProduct);
 router.get("/product/:productId", ProductController.getProductById);
 router.get("/products", ProductController.getProducts);
-router.put("/product/:productId", ProductController.updateProduct);
+router.put("/product/:productId", uploadImage, ProductController.updateProduct);
 router.delete("/product/:productId", ProductController.softDeleteProduct);
 
 // ############################## VARIANT ROUTES
@@ -48,3 +51,4 @@ router.put("/variant/:variantId", VariantController.updateVariant);
 router.delete("/variant/:variantId", VariantController.deleteVariant);
 
 export { router };
+
