@@ -9,6 +9,7 @@ import star from "../../assets/Icon/star.svg"
 import add from "../../assets/Icon/addCart.svg"
 import fav from "../../assets/Icon/favButton.svg"
 import loadMore from "../../assets/Icon/loadMore.svg"
+import FavoriteButton from "./favButton";
 
 type CardMegaSaleProps = {
   produtos: Product[];
@@ -48,7 +49,10 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
               </div>
 
               <div className="h-[344px] w-full flex items-center justify-center">
-                <img src={broken} alt={produto.name} className="sm:h-[344px] h-[358px] w-full object-contain " />
+                <img 
+                  src={produto.pathImage}  
+                  alt={produto.name} 
+                  className="text-center sm:h-[344px] h-[358px] w-full object-contain " />
               </div>
 
               <div className="relative flex h-full flex-col -mt-5 justify-between p-3">
@@ -72,14 +76,15 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
                   </div>
                 </div>
 
-                <div className="flex flex-row -ml-5 cursor-pointer">
+                <div className="flex items-center justify-between  ">
                         
                   <Button className="cursor-pointer" >
-                    <img src={add} className="w-[264px] -mr-2 cursor-pointer" />
+                    <img src={add} alt="adicionar ao cart" className="w-[264px] -mr-2 " />
                   </Button>
-                  <Button>
-                    <img src={fav} />
-                  </Button>                 
+
+                  <FavoriteButton productId={produto.id} />
+                  
+
                 </div>
               </div>
             </Card>
