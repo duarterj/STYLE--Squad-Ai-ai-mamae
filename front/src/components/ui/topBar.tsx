@@ -5,8 +5,34 @@ import Heart from '../../assets/Icon/heart.svg';
 import Search from "../../assets/Icon/search.svg"
 import ShoppingBag from '../../assets/Icon/shoppingBag.svg';
 import { Input } from './inputSearch';
+import { useState, useEffect } from 'react';
+import { getUserId } from '../../services/getUserId';
+import { getCart } from '../../services/cart';
 
 export default function TopBar() {
+    const [cartCount, setCartCount] = useState(0);
+
+    useEffect(() => {
+        const fetchCartCount = async () => {
+            const userId = getUserId();
+            if (userId) {
+                try {
+                    const response = await getCart(userId);
+                    const count = response.data.reduce((acc: number, item: any) => acc + item.quantity, 0);
+                    setCartCount(count);
+                } catch (e) {
+                    console.error("Failed to fetch cart for TopBar", e);
+                }
+            } else {
+                setCartCount(0);
+            }
+        };
+
+        fetchCartCount();
+
+        window.addEventListener('cartUpdated', fetchCartCount);
+        return () => window.removeEventListener('cartUpdated', fetchCartCount);
+    }, []);
     return (
         <div className="sticky top-0 z-50 w-full">
 
@@ -72,11 +98,16 @@ export default function TopBar() {
                                 JD
                             </span>
 
-                            <NavLink to="/carrinho" className="flex mb-2">
+                            <NavLink to="/carrinho" className="flex mb-2 relative">
                                 <img
                                     src={ShoppingBag}
                                     alt="Shopping bag"
                                 />
+                                {cartCount > 0 && (
+                                    <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#030711] text-[11px] font-bold text-white">
+                                        {cartCount}
+                                    </span>
+                                )}
                             </NavLink>
 
                         </div>
@@ -116,9 +147,9 @@ export default function TopBar() {
                             </span>
                         </NavLink>
 
-                        
 
-                        
+
+
 
                     </div>
 
@@ -149,11 +180,16 @@ export default function TopBar() {
                             JD
                         </span>
 
-                        <NavLink to="/carrinho" className="flex mb-2">
+                        <NavLink to="/carrinho" className="flex mb-2 relative">
                             <img
                                 src={ShoppingBag}
                                 alt="Shopping bag"
                             />
+                            {cartCount > 0 && (
+                                <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#030711] text-[11px] font-bold text-white">
+                                    {cartCount}
+                                </span>
+                            )}
                         </NavLink>
 
                     </div>
