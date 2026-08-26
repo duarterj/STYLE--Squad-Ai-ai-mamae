@@ -144,14 +144,14 @@ export default function SaleItems() {
       </section>
 
       {/* seção para os produtos */}
-      <section className="flex flex-col  gap-6">
-        <div className="flex flex-col">
+      <section className="flex flex-col sm:min-w-[1080px] sm:min-h-[1248px] gap-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between">
           <div className="flex ml-4 flex-col">
             <h1 className="text-2xl font-semibold">Sale Items</h1>
             <span className="text-[#6B7280] text-[16px]">{produtosFiltrados.length} products found</span>
           </div>
 
-          <div className="flex justify-end flex-row mt-2">
+          <div className="flex ml-4 h-10 sm:ml-0 sm:justify-end flex-row mt-2">
             <img src={feat} className="mr-4" />
             <img src={grade} className="mr-1" />
             <img src={lista} />
