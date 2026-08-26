@@ -7,15 +7,19 @@ node_modules/
 .idea
 
 
-#pasta uploads do multer
+# pasta uploads do multer
 uploads/photos/*
 !uploads/photos/.gitkeep
 
-#generated prisma
+# imagens utilizadas pelo seeder
+!uploads/seed_images/
+!uploads/seed_images/*.jpg
+
+# generated prisma
 src/generated/
 
 
-#pasta das keys 
+# pasta das keys
 keys/
 
 
