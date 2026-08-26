@@ -16,6 +16,7 @@ import {
 import broken from "../../assets/Icon/categoryBroke.svg"
 import { getWishlist, removeFromWishlist } from "../../services/wishlist"
 import { getUserId } from "../../services/getUserId"
+import { addToCart } from "@/services/cart";
 
 type WishlistProduct = {
     id: number
@@ -81,6 +82,7 @@ export default function WishlistSection() {
     const [error, setError] = useState<string | null>(null)
     const [removingIds, setRemovingIds] = useState<number[]>([])
     const [notifiedItems, setNotifiedItems] = useState<number[]>([])
+    const [ativo, setAtivo] = useState(false);
 
     const handleNotify = (productId: number) => {
         setNotifiedItems((current) => {
@@ -141,6 +143,40 @@ export default function WishlistSection() {
             setItems([])
         } catch {
             setError("Erro ao limpar a wishlist.")
+        }
+    }
+
+    const handleAddToCart = async (productId: number | string) => {
+        const userId = getUserId();
+
+        if (!userId) {
+            window.location.href = "/login";
+            return;
+        }
+
+        try {
+            await addToCart(userId, Number(productId), 1);
+            setAtivo(true);
+        } catch (error) {
+            console.error("Erro ao adicionar produto à wishlist:", error);
+        }
+    }
+    
+    const handleAllAddToCart = async () => {
+        const userId = getUserId();
+
+        if (!userId) {
+            window.location.href = "/login";
+            return;
+        }
+
+        try {
+            await Promise.all(
+                items.map((item) => addToCart(userId, item.productId, 1))
+            );
+            setAtivo(true);
+        } catch (error) {
+            console.error("Erro ao adicionar produto à wishlist:", error);
         }
     }
 
@@ -244,7 +280,9 @@ export default function WishlistSection() {
                         gap-4
                     "
                 >
-                    <Button className="flex items-center gap-2 border-gray-300 text-black">
+                    <Button
+                        onClick={handleAllAddToCart}
+                        className="flex items-center gap-2 border-gray-300 text-black">
                         <ShoppingBag className="h-4 w-4" />
                         Add All to Cart
                     </Button>
@@ -490,7 +528,9 @@ export default function WishlistSection() {
                                                 </>
                                             ) : (
                                                 <div className="flex items-center gap-2">
-                                                    <Button className="flex flex-1 items-center justify-center gap-2 bg-black text-white hover:bg-black/90">
+                                                    <Button
+                                                        onClick={() => handleAddToCart(product.id)}
+                                                        className="flex flex-1 items-center justify-center gap-2 bg-black text-white hover:bg-black/90">
                                                         <ShoppingBag className="h-4 w-4" />
                                                         Add to Cart
                                                     </Button>
@@ -575,6 +615,7 @@ export default function WishlistSection() {
                                         </span>
 
                                         <Button
+                                            onClick={() => handleAddToCart(item.id)}
                                             variant="outline"
                                             className="border-gray-300 text-xs text-black"
                                         >

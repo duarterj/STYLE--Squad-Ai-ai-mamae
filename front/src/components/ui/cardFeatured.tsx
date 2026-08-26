@@ -7,6 +7,8 @@ import { usePagination } from "@/hooks/userPagination";
 
 import star from "../../assets/Icon/star.svg"
 import broken from "../../assets/Icon/categoryBroke.svg"
+import { addToCart } from "@/services/cart";
+import { getUserId } from "@/services/getUserId";
 
 export default function FeatProduct() {
   const [produtos, setProdutos] = useState<Product[]>([])
@@ -16,6 +18,23 @@ export default function FeatProduct() {
   const totalPages = Math.ceil(produtos.length / itemsPerPage);
   const { page } = usePagination(Math.max(totalPages - 1, 0));
   const produtosVisiveis = produtos.slice(0, (page + 1) * itemsPerPage);
+  const [ativo, setAtivo] = useState(false);
+  
+  const handleaddToCart = async (productId: number | string) => {
+    const userId = getUserId();
+
+    if (!userId) {
+      window.location.href = "/login";
+      return;
+    }
+
+    try {
+      await addToCart(userId, Number(productId), 1);
+      setAtivo(true);
+    } catch (error) {
+      console.error("Erro ao adicionar produto à wishlist:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -78,7 +97,11 @@ export default function FeatProduct() {
                   <span className="text-sm text-gray-400 line-through">${produto.salePrice}</span>
                 ) : null}
               </div>
-              <Button className="cursor-pointer bg-white text-black border border-gray-200">Add to Cart</Button>
+              <Button 
+                onClick={() => handleaddToCart(produto.id)} 
+                className="cursor-pointer bg-white text-black border border-gray-200">
+                  Add to Cart
+              </Button>
             </div>
           </div>
         </Card>
