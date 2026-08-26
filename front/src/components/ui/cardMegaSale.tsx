@@ -73,13 +73,15 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
                 
 
 
-                <div className="flex items-end absolute inset-2 mb-3  justify-between  ">
+                <div className="flex flex-row items-end absolute inset-2 mb-3 pr-2 justify-between  ">
   
                   <Button className="cursor-pointer" >
                     <img src={add} alt="adicionar ao cart" className="w-[264px] -mr-2 " />
                   </Button>
-
-                  <FavoriteButton productId={produto.id} />
+                  
+                  <div className="-mb-1 h-10 w-10 items-center flex justify-center rounded-[10px] bg-white border border-[#E5E7EB]">
+                    <FavoriteButton productId={produto.id} />
+                  </div>
                   
                 </div>
               </CardContent>
