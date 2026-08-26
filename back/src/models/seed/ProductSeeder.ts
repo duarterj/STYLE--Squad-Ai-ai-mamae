@@ -2,6 +2,14 @@ import { faker } from "@faker-js/faker";
 import type { PrismaClient } from "../../generated/prisma/client";
 import type { CategoryType, Prisma } from "../../generated/prisma/client";
 
+const seedImagesByCategory: Record<CategoryType, string> = {
+  TOPS: "/uploads/seed_images/camisa1.jpg",
+  BOTTOMS: "/uploads/seed_images/calca1.jpg",
+  DRESSES: "/uploads/seed_images/vestido1.jpg",
+  SHOES: "/uploads/seed_images/sapato1.jpg",
+  ACCESSORIES: "/uploads/seed_images/acessorios1.jpg",
+};
+
 const tamanhosPorCategoria: Record<CategoryType, string[]> = {
   TOPS: ["XS", "S", "M", "L", "XL"],
   DRESSES: ["XS", "S", "M", "L", "XL"],
@@ -190,7 +198,7 @@ export async function productSeeder(
           description: produtoInfo.descricao,
           price: preco,
           salePrice: precoPromocional,
-          pathImage: null,
+          pathImage: seedImagesByCategory[categoria],
           category: categoria,
           collection: faker.helpers.arrayElement(COLECOES),
           rating: avaliacao,
