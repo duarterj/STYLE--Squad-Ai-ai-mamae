@@ -10,7 +10,6 @@ import star from "../../assets/Icon/star.svg"
 import add from "../../assets/Icon/addCart.svg"
 import loadMore from "../../assets/Icon/loadMore.svg"
 import FavoriteButton from "./favButton";
-import { useState } from "react";
 import { getUserId } from "@/services/getUserId";
 
 type CardMegaSaleProps = {
@@ -23,9 +22,7 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
   const totalPages = Math.ceil(produtosMegaSale.length / itemsPerPage);
   const { page, goNext } = usePagination(Math.max(totalPages - 1, 0));
   const produtosVisiveis = produtosMegaSale.slice(0, (page + 1) * itemsPerPage);
-  const [ativo, setAtivo] = useState(false);
-  
-  const handleaddToCart = async (productId: number | string) => {
+  const handleAddToCart = async (produto: Product) => {
     const userId = getUserId();
 
     if (!userId) {
@@ -33,12 +30,18 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
       return;
     }
 
-    try {
-      await addToCart(userId, Number(productId), 1);
-      setAtivo(true);
-    } catch (error) {
-      console.error("Erro ao adicionar produto à wishlist:", error);
+    const variant = produto.variants?.find((item) => item.stock > 0);
+    if (!variant) {
+      console.error("Produto sem variante disponível em estoque.");
+      return;
     }
+
+    try {
+      await addToCart(userId, variant.id, 1);
+    } catch (error) {
+      console.error("Erro ao adicionar produto ao carrinho:", error);
+    }
+    
   };
   return (
     <>
@@ -96,11 +99,12 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
 
                 <div className="flex flex-row items-end absolute inset-2 mb-3 pr-2 justify-between  ">
   
-                  <Button className="cursor-pointer" >
+                  <Button
+                    className="cursor-pointer"
+                    onClick={() => handleAddToCart(produto)}
+                  >
                     <img 
-                      src={add}                      
-                      aria-label="Adicionar à wishlist"
-                      onClick={() => handleaddToCart(produto.id)}
+                      src={add}
                       alt="adicionar ao cart" 
                       className="w-[264px] -mr-2 " />
                   </Button>

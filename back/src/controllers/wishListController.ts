@@ -40,7 +40,11 @@ export class WishlistItemController {
             const wishlist = await prisma.wishlistItem.findMany({
                 where: { userId: Number(id) },
                 include: {
-                    product: true
+                    product: {
+                        include: {
+                            variants: true
+                        }
+                    }
                 }
             });
 

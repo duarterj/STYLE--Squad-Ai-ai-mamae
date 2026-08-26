@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
-import { addToWishlist, getWishlist } from "@/services/wishlist";
+import { addToWishlist, getWishlist, removeFromWishlist } from "@/services/wishlist";
 import { getUserId } from "../../services/getUserId";
 
 interface FavoriteButtonProps {
@@ -40,7 +40,7 @@ export default function FavoriteButton({ productId }: FavoriteButtonProps) {
     checkStatus();
   }, [productId]);
   
-  const handleAddToWishlist = async (productId: number | string) => {
+  const handleToggleWishlist = async (productId: number | string) => {
     const userId = getUserId();
 
     if (!userId) {
@@ -49,8 +49,13 @@ export default function FavoriteButton({ productId }: FavoriteButtonProps) {
     }
 
     try {
-      await addToWishlist(userId, Number(productId));
-      setAtivo(true);
+      if (ativo) {
+        await removeFromWishlist(userId, Number(productId));
+        setAtivo(false);
+      } else {
+        await addToWishlist(userId, Number(productId));
+        setAtivo(true);
+      }
     } catch (error) {
       console.error("Erro ao adicionar produto à wishlist:", error);
     }
@@ -60,8 +65,8 @@ export default function FavoriteButton({ productId }: FavoriteButtonProps) {
     <Button
       size="icon"
       type="button"
-      aria-label="Adicionar à wishlist"
-      onClick={() => handleAddToWishlist(productId)}
+      aria-label={ativo ? "Remover da wishlist" : "Adicionar à wishlist"}
+      onClick={() => handleToggleWishlist(productId)}
       className="cursor-pointer"
     >
       <Heart

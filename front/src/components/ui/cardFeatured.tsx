@@ -18,9 +18,8 @@ export default function FeatProduct() {
   const totalPages = Math.ceil(produtos.length / itemsPerPage);
   const { page } = usePagination(Math.max(totalPages - 1, 0));
   const produtosVisiveis = produtos.slice(0, (page + 1) * itemsPerPage);
-  const [ativo, setAtivo] = useState(false);
-  
-  const handleaddToCart = async (productId: number | string) => {
+
+   const handleAddToCart = async (produto: Product) => {
     const userId = getUserId();
 
     if (!userId) {
@@ -28,11 +27,16 @@ export default function FeatProduct() {
       return;
     }
 
+    const variant = produto.variants?.find((item) => item.stock > 0);
+    if (!variant) {
+      console.error("Produto sem variante disponível em estoque.");
+      return;
+    }
+
     try {
-      await addToCart(userId, Number(productId), 1);
-      setAtivo(true);
+      await addToCart(userId, variant.id, 1);
     } catch (error) {
-      console.error("Erro ao adicionar produto à wishlist:", error);
+      console.error("Erro ao adicionar produto ao carrinho:", error);
     }
   };
 
@@ -98,7 +102,7 @@ export default function FeatProduct() {
                 ) : null}
               </div>
               <Button 
-                onClick={() => handleaddToCart(produto.id)} 
+                onClick={() => handleAddToCart(produto)}
                 className="cursor-pointer bg-white text-black border border-gray-200">
                   Add to Cart
               </Button>

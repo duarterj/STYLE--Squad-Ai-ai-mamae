@@ -17,6 +17,7 @@ import broken from "../../assets/Icon/categoryBroke.svg"
 import { getWishlist, removeFromWishlist } from "../../services/wishlist"
 import { getUserId } from "../../services/getUserId"
 import { addToCart } from "@/services/cart";
+import type { Variant } from "@/services/product";
 
 type WishlistProduct = {
     id: number
@@ -29,6 +30,8 @@ type WishlistProduct = {
     category: string
     rating: number
     ratingCount: number
+    collection? : string
+    variants: Variant[]
 }
 
 type WishlistItem = {
@@ -82,7 +85,6 @@ export default function WishlistSection() {
     const [error, setError] = useState<string | null>(null)
     const [removingIds, setRemovingIds] = useState<number[]>([])
     const [notifiedItems, setNotifiedItems] = useState<number[]>([])
-    const [ativo, setAtivo] = useState(false);
 
     const handleNotify = (productId: number) => {
         setNotifiedItems((current) => {
@@ -146,21 +148,27 @@ export default function WishlistSection() {
         }
     }
 
-    const handleAddToCart = async (productId: number | string) => {
+    const handleAddToCart = async (produto: WishlistProduct) => {
         const userId = getUserId();
 
         if (!userId) {
-            window.location.href = "/login";
+        window.location.href = "/login";
+        return;
+        }
+
+        const variant = produto.variants.find((item) => item.stock > 0);
+        if (!variant) {
+            console.error("Produto sem variante disponível em estoque.");
             return;
         }
 
         try {
-            await addToCart(userId, Number(productId), 1);
-            setAtivo(true);
+            await addToCart(userId, variant.id, 1);
         } catch (error) {
-            console.error("Erro ao adicionar produto à wishlist:", error);
+            console.error("Erro ao adicionar produto ao carrinho:", error);
         }
-    }
+    
+    };
     
     const handleAllAddToCart = async () => {
         const userId = getUserId();
@@ -172,11 +180,13 @@ export default function WishlistSection() {
 
         try {
             await Promise.all(
-                items.map((item) => addToCart(userId, item.productId, 1))
+                items.map((item) => {
+                    const variant = item.product.variants.find((entry) => entry.stock > 0);
+                    return variant ? addToCart(userId, variant.id, 1) : Promise.resolve();
+                })
             );
-            setAtivo(true);
         } catch (error) {
-            console.error("Erro ao adicionar produto à wishlist:", error);
+            console.error("Erro ao adicionar produtos ao carrinho:", error);
         }
     }
 
@@ -529,7 +539,7 @@ export default function WishlistSection() {
                                             ) : (
                                                 <div className="flex items-center gap-2">
                                                     <Button
-                                                        onClick={() => handleAddToCart(product.id)}
+                                                        onClick={() => handleAddToCart(product)}
                                                         className="flex flex-1 items-center justify-center gap-2 bg-black text-white hover:bg-black/90">
                                                         <ShoppingBag className="h-4 w-4" />
                                                         Add to Cart
