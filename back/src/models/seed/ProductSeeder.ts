@@ -3,11 +3,11 @@ import type { PrismaClient } from "../../generated/prisma/client";
 import type { CategoryType, Prisma } from "../../generated/prisma/client";
 
 const seedImagesByCategory: Record<CategoryType, string> = {
-  TOPS: "seed_images/camisa1.jpg",
-  BOTTOMS: "seed_images/calca1.jpg",
-  DRESSES: "seed_images/vestido1.jpg",
-  SHOES: "seed_images/sapato1.jpg",
-  ACCESSORIES: "seed_images/acessorios1.jpg",
+  TOPS: "/uploads/seed_images/camisa1.jpg",
+  BOTTOMS: "/uploads/seed_images/calca1.jpg",
+  DRESSES: "/uploads/seed_images/vestido1.jpg",
+  SHOES: "/uploads/seed_images/sapato1.jpg",
+  ACCESSORIES: "/uploads/seed_images/acessorios1.jpg",
 };
 
 const tamanhosPorCategoria: Record<CategoryType, string[]> = {
