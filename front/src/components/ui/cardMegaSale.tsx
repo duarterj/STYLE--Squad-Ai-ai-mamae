@@ -47,7 +47,11 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
 
               <div className="h-[344px] w-full flex items-center justify-center">
                 <img 
-                  src={ produto.pathImage ? "http://localhost:3333${produto.pathImage" : broken }  
+                  src={
+                  produto.pathImage
+                    ? `http://localhost:3333${produto.pathImage}`
+                    : broken
+                  }  
                   alt={produto.name} 
                   className="text-center sm:h-[344px] h-[358px] w-full object-contain " />
               </div>
