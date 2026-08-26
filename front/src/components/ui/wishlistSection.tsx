@@ -342,7 +342,7 @@ export default function WishlistSection() {
                                         className="relative flex h-55 w-full items-center justify-center bg-gray-100"
                                     >
                                         <img
-                                            src={product.pathImage || broken}
+                                            src={product.pathImage ? `http://localhost:3333${product.pathImage}` : broken }
                                             alt={product.name}
                                             className={`object-contain ${product.pathImage ? "h-full w-full object-cover" : "h-16 w-16 opacity-60"}`}
                                         />
