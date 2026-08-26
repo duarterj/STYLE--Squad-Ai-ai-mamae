@@ -56,16 +56,16 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
               return (
             <Card
               key={produto.id}
-              className="relative h-[540px] w-[358px] sm:h-[526px] sm:w-[344px] rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              className="relative  overflow-hidden h-[540px] w-[358px] sm:h-[526px] sm:w-[344px] rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
 
-              <div className="absolute inset-0 flex items-start justify-start p-2">
+              <div className="absolute inset-x-0 top-0 flex justify-between items-center  p-2">
                 <Badge className="bg-[#DC2626] text-white">{desconto}%</Badge>
-                <Badge className="bg-[#F3F4F6] flex ml-auto w-max">{produto.collection}</Badge>
+                <Badge className="bg-[#F3F4F6] flex relative   ml-auto w-max">{produto.collection}</Badge>
               </div>
 
 
-              <div className="h-[344px] w-full flex items-center justify-center">
+              <div className=" h-[344px] w-full flex items-center justify-center">
                 <img 
                   src={
                   produto.pathImage
@@ -97,7 +97,7 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
                 
 
 
-                <div className="flex flex-row items-end absolute inset-2 mb-3 pr-2 justify-between  ">
+                <div className="flex flex-row items-end mt-4  pr-2 justify-between  ">
   
                   <Button
                     className="cursor-pointer"
