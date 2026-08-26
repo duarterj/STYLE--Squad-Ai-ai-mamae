@@ -3,12 +3,15 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { type Product } from "@/services/product";
 import { usePagination } from '../../hooks/userPagination';
+import {addToCart} from "@/services/cart";
 
 import broken from "../../assets/Icon/categoryBroke.svg"
 import star from "../../assets/Icon/star.svg"
 import add from "../../assets/Icon/addCart.svg"
 import loadMore from "../../assets/Icon/loadMore.svg"
 import FavoriteButton from "./favButton";
+import { useState } from "react";
+import { getUserId } from "@/services/getUserId";
 
 type CardMegaSaleProps = {
   produtos: Product[];
@@ -20,9 +23,23 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
   const totalPages = Math.ceil(produtosMegaSale.length / itemsPerPage);
   const { page, goNext } = usePagination(Math.max(totalPages - 1, 0));
   const produtosVisiveis = produtosMegaSale.slice(0, (page + 1) * itemsPerPage);
+  const [ativo, setAtivo] = useState(false);
   
-  
+  const handleaddToCart = async (productId: number | string) => {
+    const userId = getUserId();
 
+    if (!userId) {
+      window.location.href = "/login";
+      return;
+    }
+
+    try {
+      await addToCart(userId, Number(productId), 1);
+      setAtivo(true);
+    } catch (error) {
+      console.error("Erro ao adicionar produto à wishlist:", error);
+    }
+  };
   return (
     <>
       <section>
@@ -80,7 +97,12 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
                 <div className="flex flex-row items-end absolute inset-2 mb-3 pr-2 justify-between  ">
   
                   <Button className="cursor-pointer" >
-                    <img src={add} alt="adicionar ao cart" className="w-[264px] -mr-2 " />
+                    <img 
+                      src={add}                      
+                      aria-label="Adicionar à wishlist"
+                      onClick={() => handleaddToCart(produto.id)}
+                      alt="adicionar ao cart" 
+                      className="w-[264px] -mr-2 " />
                   </Button>
                   
                   <div className="-mb-1 h-10 w-10 items-center flex justify-center rounded-[10px] bg-white border border-[#E5E7EB]">
