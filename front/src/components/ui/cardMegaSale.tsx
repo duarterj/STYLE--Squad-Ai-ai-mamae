@@ -1,14 +1,14 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { type Product } from "@/services/product";
 import { usePagination } from '../../hooks/userPagination';
 
 import broken from "../../assets/Icon/categoryBroke.svg"
 import star from "../../assets/Icon/star.svg"
 import add from "../../assets/Icon/addCart.svg"
-import fav from "../../assets/Icon/favButton.svg"
 import loadMore from "../../assets/Icon/loadMore.svg"
+import FavoriteButton from "./favButton";
 
 type CardMegaSaleProps = {
   produtos: Product[];
@@ -41,47 +41,54 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
 
               <div className="absolute inset-0 flex items-start justify-start p-2">
                 <Badge className="bg-[#DC2626] text-white">{desconto}%</Badge>
+                <Badge className="bg-[#F3F4F6] flex ml-auto w-max">{produto.collection}</Badge>
               </div>
 
-              <div className="absolute inset-0 flex items-start justify-end p-2">
-                <Badge className="bg-[#F3F4F6] ">{produto.collection}</Badge>
-              </div>
 
               <div className="h-[344px] w-full flex items-center justify-center">
-                <img src={broken} alt={produto.name} className="sm:h-[344px] h-[358px] w-full object-contain " />
+                <img 
+                  src={
+                  produto.pathImage
+                    ? `http://localhost:3333${produto.pathImage}`
+                    : broken
+                  }  
+                  alt={produto.name} 
+                  className="text-center sm:h-[344px] h-[358px] w-full object-contain " />
               </div>
 
-              <div className="relative flex h-full flex-col -mt-5 justify-between p-3">
+              <CardContent className="   flex h-full flex-col -mt-5 justify-between p-3">
                 <div>
-                  <div className="absolute inset-0 flex justify-start p-4">
+                  <div className=" flex justify-start mt-1">
                     <Badge className="bg-white border-[#E5E7EB] ">{produto.category}</Badge>
                   </div>
-                  <div className="flex items-center justify-end gap-1 mt-2">
+                  <div className="flex items-center justify-end gap-1">
                     <img src={star} />
                     <span className="text-sm font-medium">{produto.rating}</span>
                     <span className="text-sm text-gray-500">({produto.ratingCount})</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-left">{produto.name}</h3>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-baseline gap-1">
+                  <h3 className=" mb-2 text-lg font-semibold text-left">{produto.name}</h3>
+                  <div className="flex items-baseline  gap-1">
                     <span className="text-xl text-[#DC2626] font-bold">${produto.salePrice}</span>
                     <span className="text-sm text-gray-400 line-through">${produto.price}</span>
                     <Badge className="bg-[#EF4343] text-white">Save ${total}</Badge>
                   </div>
                 </div>
+                
+                
 
-                <div className="flex flex-row -ml-5 cursor-pointer">
-                        
+
+                <div className="flex flex-row items-end absolute inset-2 mb-3 pr-2 justify-between  ">
+  
                   <Button className="cursor-pointer" >
-                    <img src={add} className="w-[264px] -mr-2 cursor-pointer" />
+                    <img src={add} alt="adicionar ao cart" className="w-[264px] -mr-2 " />
                   </Button>
-                  <Button>
-                    <img src={fav} />
-                  </Button>                 
+                  
+                  <div className="-mb-1 h-10 w-10 items-center flex justify-center rounded-[10px] bg-white border border-[#E5E7EB]">
+                    <FavoriteButton productId={produto.id} />
+                  </div>
+                  
                 </div>
-              </div>
+              </CardContent>
             </Card>
               );
             })()
