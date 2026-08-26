@@ -72,9 +72,9 @@ export default function SaleItems() {
   });
 
   return (
-    <div className="flex min-w-[1368px] flex-row gap-8">
+    <div className="flex flex-col  sm:flex-row gap-8">
       {/* seção do filtroCategoria */}
-      <section className="flex flex-col w-[256px] gap-4 h-[548px]">
+      <section className="flex flex-col pl-4  w-[256px] gap-4 h-[548px]">
         <div className="lg:hidden flex items-end flex-row">
           <img src={filter} className="h-5" />
           <h1 className="mt-2 text-[16px] font-semibold">Filters</h1>
@@ -144,7 +144,7 @@ export default function SaleItems() {
       </section>
 
       {/* seção para os produtos */}
-      <section className="flex flex-col min-w-[1098px] min-h-[1076px] gap-6">
+      <section className="flex flex-col  gap-6">
         <div className="flex flex-col">
           <div className="flex ml-4 flex-col">
             <h1 className="text-2xl font-semibold">Sale Items</h1>

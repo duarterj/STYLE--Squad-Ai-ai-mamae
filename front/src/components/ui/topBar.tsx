@@ -68,11 +68,11 @@ export default function TopBar() {
                                 />
                             </NavLink>
 
-                            <span className="mt-2 flex items-center justify-center rounded-full h-8 w-8 bg-[#f3f4f6] text-[14px]">
+                            <span className="mt-3 flex items-center justify-center rounded-full h-8 w-8 bg-[#f3f4f6] text-[14px]">
                                 JD
                             </span>
 
-                            <NavLink to="/carrinho" className="flex items-center">
+                            <NavLink to="/carrinho" className="flex mb-2">
                                 <img
                                     src={ShoppingBag}
                                     alt="Shopping bag"
@@ -107,13 +107,18 @@ export default function TopBar() {
 
                     <div className="flex items-center gap-2 font-bold">
 
-                        <span className="flex h-8 w-8 items-center justify-center rounded-[12px] bg-[#030711] text-[18px] text-white">
-                            S
-                        </span>
+                        <NavLink to="/" className=" flex flex-row gap-2 font-bold">
+                            <span className="flex h-8 w-8 items-center justify-center rounded-[12px] bg-[#030711] text-[18px] text-white">
+                                S
+                            </span>
+                            <span className="text-[20px]">
+                                Style
+                            </span>
+                        </NavLink>
 
-                        <span className="text-[20px]">
-                            Style
-                        </span>
+                        
+
+                        
 
                     </div>
 
@@ -144,7 +149,7 @@ export default function TopBar() {
                             JD
                         </span>
 
-                        <NavLink to="/carrinho" className="flex items-center">
+                        <NavLink to="/carrinho" className="flex mb-2">
                             <img
                                 src={ShoppingBag}
                                 alt="Shopping bag"

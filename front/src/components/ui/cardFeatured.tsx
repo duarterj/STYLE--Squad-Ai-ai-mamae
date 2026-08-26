@@ -7,6 +7,8 @@ import { usePagination } from "@/hooks/userPagination";
 
 import star from "../../assets/Icon/star.svg"
 import broken from "../../assets/Icon/categoryBroke.svg"
+import { addToCart } from "@/services/cart";
+import { getUserId } from "@/services/getUserId";
 
 export default function FeatProduct() {
   const [produtos, setProdutos] = useState<Product[]>([])
@@ -16,6 +18,27 @@ export default function FeatProduct() {
   const totalPages = Math.ceil(produtos.length / itemsPerPage);
   const { page } = usePagination(Math.max(totalPages - 1, 0));
   const produtosVisiveis = produtos.slice(0, (page + 1) * itemsPerPage);
+
+   const handleAddToCart = async (produto: Product) => {
+    const userId = getUserId();
+
+    if (!userId) {
+      window.location.href = "/login";
+      return;
+    }
+
+    const variant = produto.variants?.find((item) => item.stock > 0);
+    if (!variant) {
+      console.error("Produto sem variante disponível em estoque.");
+      return;
+    }
+
+    try {
+      await addToCart(userId, variant.id, 1);
+    } catch (error) {
+      console.error("Erro ao adicionar produto ao carrinho:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -56,7 +79,7 @@ export default function FeatProduct() {
 
           <div className="h-[318px]  w-full bg-gray-100 flex  items-center justify-center">
             <img 
-              src={ produto.pathImage ? "http://localhost:3333${produto.pathImage" : broken } 
+              src={produto.pathImage ? `http://localhost:3333${produto.pathImage}` : broken } 
               alt={produto.name} 
               className="text-center sm:h-[318px] h-[358px] w-[358px] object-contain" />
           </div>
@@ -78,7 +101,11 @@ export default function FeatProduct() {
                   <span className="text-sm text-gray-400 line-through">${produto.salePrice}</span>
                 ) : null}
               </div>
-              <Button className="cursor-pointer bg-white text-black border border-gray-200">Add to Cart</Button>
+              <Button 
+                onClick={() => handleAddToCart(produto)}
+                className="cursor-pointer bg-white text-black border border-gray-200">
+                  Add to Cart
+              </Button>
             </div>
           </div>
         </Card>

@@ -16,6 +16,8 @@ import {
 import broken from "../../assets/Icon/categoryBroke.svg"
 import { getWishlist, removeFromWishlist } from "../../services/wishlist"
 import { getUserId } from "../../services/getUserId"
+import { addToCart } from "@/services/cart";
+import type { Variant } from "@/services/product";
 
 type WishlistProduct = {
     id: number
@@ -28,6 +30,8 @@ type WishlistProduct = {
     category: string
     rating: number
     ratingCount: number
+    collection? : string
+    variants: Variant[]
 }
 
 type WishlistItem = {
@@ -144,6 +148,48 @@ export default function WishlistSection() {
         }
     }
 
+    const handleAddToCart = async (produto: WishlistProduct) => {
+        const userId = getUserId();
+
+        if (!userId) {
+        window.location.href = "/login";
+        return;
+        }
+
+        const variant = produto.variants.find((item) => item.stock > 0);
+        if (!variant) {
+            console.error("Produto sem variante disponível em estoque.");
+            return;
+        }
+
+        try {
+            await addToCart(userId, variant.id, 1);
+        } catch (error) {
+            console.error("Erro ao adicionar produto ao carrinho:", error);
+        }
+    
+    };
+    
+    const handleAllAddToCart = async () => {
+        const userId = getUserId();
+
+        if (!userId) {
+            window.location.href = "/login";
+            return;
+        }
+
+        try {
+            await Promise.all(
+                items.map((item) => {
+                    const variant = item.product.variants.find((entry) => entry.stock > 0);
+                    return variant ? addToCart(userId, variant.id, 1) : Promise.resolve();
+                })
+            );
+        } catch (error) {
+            console.error("Erro ao adicionar produtos ao carrinho:", error);
+        }
+    }
+
     if (loading) {
         return (
             <div className="flex min-h-100 w-full items-center justify-center">
@@ -244,7 +290,9 @@ export default function WishlistSection() {
                         gap-4
                     "
                 >
-                    <Button className="flex items-center gap-2 border-gray-300 text-black">
+                    <Button
+                        onClick={handleAllAddToCart}
+                        className="flex items-center gap-2 border-gray-300 text-black">
                         <ShoppingBag className="h-4 w-4" />
                         Add All to Cart
                     </Button>
@@ -342,7 +390,7 @@ export default function WishlistSection() {
                                         className="relative flex h-55 w-full items-center justify-center bg-gray-100"
                                     >
                                         <img
-                                            src={product.pathImage || broken}
+                                            src={product.pathImage ? `http://localhost:3333${product.pathImage}` : broken }
                                             alt={product.name}
                                             className={`object-contain ${product.pathImage ? "h-full w-full object-cover" : "h-16 w-16 opacity-60"}`}
                                         />
@@ -490,7 +538,9 @@ export default function WishlistSection() {
                                                 </>
                                             ) : (
                                                 <div className="flex items-center gap-2">
-                                                    <Button className="flex flex-1 items-center justify-center gap-2 bg-black text-white hover:bg-black/90">
+                                                    <Button
+                                                        onClick={() => handleAddToCart(product)}
+                                                        className="flex flex-1 items-center justify-center gap-2 bg-black text-white hover:bg-black/90">
                                                         <ShoppingBag className="h-4 w-4" />
                                                         Add to Cart
                                                     </Button>
@@ -575,6 +625,7 @@ export default function WishlistSection() {
                                         </span>
 
                                         <Button
+                                            onClick={() => handleAddToCart(item.id)}
                                             variant="outline"
                                             className="border-gray-300 text-xs text-black"
                                         >

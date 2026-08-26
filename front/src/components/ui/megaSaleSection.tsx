@@ -78,7 +78,7 @@ export default function MegaSaleSection(){
             </div>
 
             {/* gerencia a page em tela pequena */}
-            <div className=" md:hidden ">
+            <div className=" md:hidden  ">
 
                 {/* hero Banner da pagina */}
                 <div className="flex items-center justify-center gap-6 flex-col bg-gradient-to-r from-[#ef4444] to-[#db2777]  h-[398px] ">

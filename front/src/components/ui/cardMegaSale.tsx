@@ -3,12 +3,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { type Product } from "@/services/product";
 import { usePagination } from '../../hooks/userPagination';
+import {addToCart} from "@/services/cart";
 
 import broken from "../../assets/Icon/categoryBroke.svg"
 import star from "../../assets/Icon/star.svg"
 import add from "../../assets/Icon/addCart.svg"
 import loadMore from "../../assets/Icon/loadMore.svg"
 import FavoriteButton from "./favButton";
+import { getUserId } from "@/services/getUserId";
 
 type CardMegaSaleProps = {
   produtos: Product[];
@@ -20,9 +22,27 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
   const totalPages = Math.ceil(produtosMegaSale.length / itemsPerPage);
   const { page, goNext } = usePagination(Math.max(totalPages - 1, 0));
   const produtosVisiveis = produtosMegaSale.slice(0, (page + 1) * itemsPerPage);
-  
-  
+  const handleAddToCart = async (produto: Product) => {
+    const userId = getUserId();
 
+    if (!userId) {
+      window.location.href = "/login";
+      return;
+    }
+
+    const variant = produto.variants?.find((item) => item.stock > 0);
+    if (!variant) {
+      console.error("Produto sem variante disponível em estoque.");
+      return;
+    }
+
+    try {
+      await addToCart(userId, variant.id, 1);
+    } catch (error) {
+      console.error("Erro ao adicionar produto ao carrinho:", error);
+    }
+    
+  };
   return (
     <>
       <section>
@@ -36,16 +56,16 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
               return (
             <Card
               key={produto.id}
-              className="relative h-[540px] w-[358px] sm:h-[526px] sm:w-[344px] rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              className="relative  overflow-hidden h-[540px] w-[358px] sm:h-[526px] sm:w-[344px] rounded-b-[12px] pt-0 border-none bg-white text-black shadow-[0_30px_60px_#0f172a1e] transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
 
-              <div className="absolute inset-0 flex items-start justify-start p-2">
+              <div className="absolute inset-x-0 top-0 flex justify-between items-center  p-2">
                 <Badge className="bg-[#DC2626] text-white">{desconto}%</Badge>
-                <Badge className="bg-[#F3F4F6] flex ml-auto w-max">{produto.collection}</Badge>
+                <Badge className="bg-[#F3F4F6] flex relative   ml-auto w-max">{produto.collection}</Badge>
               </div>
 
 
-              <div className="h-[344px] w-full flex items-center justify-center">
+              <div className=" h-[344px] w-full flex items-center justify-center">
                 <img 
                   src={
                   produto.pathImage
@@ -77,10 +97,16 @@ export default function CardMegaSale({ produtos }: CardMegaSaleProps) {
                 
 
 
-                <div className="flex flex-row items-end absolute inset-2 mb-3 pr-2 justify-between  ">
+                <div className="flex flex-row items-end mt-4  pr-2 justify-between  ">
   
-                  <Button className="cursor-pointer" >
-                    <img src={add} alt="adicionar ao cart" className="w-[264px] -mr-2 " />
+                  <Button
+                    className="cursor-pointer"
+                    onClick={() => handleAddToCart(produto)}
+                  >
+                    <img 
+                      src={add}
+                      alt="adicionar ao cart" 
+                      className="w-[264px] -mr-2 " />
                   </Button>
                   
                   <div className="-mb-1 h-10 w-10 items-center flex justify-center rounded-[10px] bg-white border border-[#E5E7EB]">
