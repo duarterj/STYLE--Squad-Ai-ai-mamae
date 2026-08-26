@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { usePagination } from "@/hooks/userPagination";
 
 import star from "../../assets/Icon/star.svg"
+import broken from "../../assets/Icon/categoryBroke.svg"
 
 export default function FeatProduct() {
   const [produtos, setProdutos] = useState<Product[]>([])
@@ -55,7 +56,7 @@ export default function FeatProduct() {
 
           <div className="h-[318px]  w-full bg-gray-100 flex  items-center justify-center">
             <img 
-              src={produto.pathImage} 
+              src={ produto.pathImage ? "http://localhost:3333${produto.pathImage" : broken } 
               alt={produto.name} 
               className="text-center sm:h-[318px] h-[358px] w-[358px] object-contain" />
           </div>

@@ -33,9 +33,10 @@ export default function FavoriteButton({ productId }: FavoriteButtonProps) {
       type="button"
       aria-label="Adicionar à wishlist"
       onClick={() => handleAddToWishlist(productId)}
+      className="cursor-pointer h-10 w-10 bg-white border-2"
     >
       <Heart
-        className={`h-10 w-10 transition-all duration-300 ${ativo ? "fill-black text-black" : "fill-transparent text-black"}`}
+        className={`h-19 transition-all duration-300 ${ativo ? "fill-blac text-black" : "fill-transparent text-black"}`}
       />
     </Button>
   );
