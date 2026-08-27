@@ -40,7 +40,7 @@ router.delete('/users/:id/cart/:variantId', AuthMiddleware.execute, CartItemCont
 router.post("/product", uploadImage, validateRequestBodyData(ProductValidator.createProduct), ProductController.createProduct);
 router.get("/product/:productId", ProductController.getProductById);
 router.get("/products", ProductController.getProducts);
-router.post("/product", uploadImage, validateRequestBodyData(ProductValidator.createProduct), ProductController.createProduct);
+router.put("/product", uploadImage, validateRequestBodyData(ProductValidator.updateProduct), ProductController.updateProduct);
 router.delete("/product/:productId", ProductController.softDeleteProduct);
 
 // ############################## VARIANT ROUTES
