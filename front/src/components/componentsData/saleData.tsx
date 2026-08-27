@@ -1,15 +1,15 @@
 export const produtosSale = [
-  { name: "Premium Cotton T-shirt", preco: "$29", precoOld: "$49", rate: "4.8", reviews: 124, badgeD: "-41%", badgeT: "Limited Time", badgeC:"Tops", badgeS:"$21"  },
-  { name: "Designer Jeans", preco: "$79", precoOld: "120", rate: "4.9", reviews: 89, badgeD: "-34%", badgeT: "Best Seller", badgeC:"Bottoms", badgeS:"$41"  },
-  { name: "Leather Ankle Boots", preco: "$99", precoOld: "$180", rate: "4.7", reviews: 203, badgeD: "-45%", badgeT: "Flash Sale", badgeC:"Shoes", badgeS:"$81" },
-  { name: "Cashmere Sweater", preco: "$120", precoOld: "200", rate: "4.8", reviews: 156, badgeD: "-40%", badgeT: "Luxury Sale", badgeC:"Tops", badgeS:"$80" },
-  { name: "Summer Dress", preco: "$49", precoOld: "$89", rate: "4.6", reviews: 91, badgeD: "-45%", badgeT: "Summer Sale", badgeC:"TDresses", badgeS:"$40"  },
-  { name: "Atheletic Sneakers", preco: "$84", precoOld: "$140", rate: "4.5", reviews: 234, badgeD: "-40%", badgeT: "Sport Sale", badgeC:"Shoes", badgeS:"$56"  },
+  { "name": "Premium Cotton T-shirt", "price": "49", "salePrice": "29", "rating": "4.8", "ratingCount": 124, "collection": "Limited Time", "category":"TOPS",  "size": "M"  },
+  { "name": "Designer Jeans", "price": "79", "salePrice": "120", "rating": "4.9", "ratingCount": 89, badgeD: "-34%", collection: "Best Seller", "category":"Bottoms", size: "M"  },
+  { "name": "Leather Ankle Boots", "price": "99", "priceoOld": "180", "rating": "4.7", "ratingCount": 203, badgeD: "-45%", collection: "Flash Sale", "category":"Shoes", size: "32" },
+  { "name": "Cashmere Sweater", "price": "120", "salePrice": "200", "rating": "4.8", "ratingCount": 156, badgeD: "-40%", collection: "Luxury Sale", "category":"Tops",size: "" },
+  { "name": "Summer Dress", "price": "49", "salePrice": "89", "rating": "4.6", "ratingCount": 91, badgeD: "-45%", collection: "Summer Sale", "category":"Dresses", size: "M"  },
+  { "name": "Atheletic Sneakers", "price": "84", "salePrice": "140", "rating": "4.5", "ratingCount": 234,  collection: "Sport Sale", "category":"Shoes", size: "28"  },
 
 ]
 
 
 // badgeD = badge do desconto
-// badgeT = badge do tipo de sale
-// badgeC = badge para categoria do item
+// collection = badge do tipo de sale
+// category = badge para category do item
 // badgeS = badge para o quanto salvou de dinheiro

@@ -1,12 +1,38 @@
 // import { Input } from "../components/input"
 
 import { NavLink } from 'react-router-dom';
-import  Heart  from '../assets/Icon/heart.svg';
-import Search from "../assets/Icon/search.svg"
-import  ShoppingBag  from '../assets/Icon/shoppingBag.svg';
-import { Input } from './ui/inputSearch';
+import Heart from '../../assets/Icon/heart.svg';
+import Search from "../../assets/Icon/search.svg"
+import ShoppingBag from '../../assets/Icon/shoppingBag.svg';
+import { Input } from './inputSearch';
+import { useState, useEffect } from 'react';
+import { getUserId } from '../../services/getUserId';
+import { getCart } from '../../services/cart';
 
 export default function TopBar() {
+    const [cartCount, setCartCount] = useState(0);
+
+    useEffect(() => {
+        const fetchCartCount = async () => {
+            const userId = getUserId();
+            if (userId) {
+                try {
+                    const response = await getCart(userId);
+                    const count = response.data.reduce((acc: number, item: any) => acc + item.quantity, 0);
+                    setCartCount(count);
+                } catch (e) {
+                    console.error("Failed to fetch cart for TopBar", e);
+                }
+            } else {
+                setCartCount(0);
+            }
+        };
+
+        fetchCartCount();
+
+        window.addEventListener('cartUpdated', fetchCartCount);
+        return () => window.removeEventListener('cartUpdated', fetchCartCount);
+    }, []);
     return (
         <div className="sticky top-0 z-50 w-full">
 
@@ -21,13 +47,13 @@ export default function TopBar() {
 
                     {/* div para a barra que contem o icons, link para outras abas e etc*/}
                     <div className="flex p-4 md:gap-2 items-center justify-evenly ml-69 md:ml-0 md:mr-0 mr-69  " >
-                
-                        
+
+
                         <NavLink to="/" className=" flex flex-row gap-2 font-bold">
                             <span className="flex items-center justify-center text-[18px] rounded-[12px] h-8 w-8 bg-[#030711] text-white">S</span>
                             <span className=" text-[20px]"> Style</span>
                         </NavLink>
-                        
+
 
                         {/* link das outra abas */}
                         <div className="font-[rgba(3, 7, 17, 0.8)] gap-8 flex items-start text-[14px] text-left">
@@ -58,26 +84,38 @@ export default function TopBar() {
                         {/* icones do final */}
                         <div className="flex flex-row align-middle">
 
-                            <img
-                                src={Heart}
-                                alt="Favorites"
-                            />
+                            <NavLink
+                                to="/wishlist"
+                                className="flex items-center"
+                            >
+                                <img
+                                    src={Heart}
+                                    alt="Favorites"
+                                />
+                            </NavLink>
 
-                            <span className="mt-2 flex items-center justify-center rounded-full h-8 w-8 bg-[#f3f4f6] text-[14px]">
+                            <span className="mt-3 flex items-center justify-center rounded-full h-8 w-8 bg-[#f3f4f6] text-[14px]">
                                 JD
                             </span>
 
-                            <img
-                                src={ShoppingBag}
-                                alt="Shopping bag"
-                            />
+                            <NavLink to="/carrinho" className="flex mb-2 relative">
+                                <img
+                                    src={ShoppingBag}
+                                    alt="Shopping bag"
+                                />
+                                {cartCount > 0 && (
+                                    <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#030711] text-[11px] font-bold text-white">
+                                        {cartCount}
+                                    </span>
+                                )}
+                            </NavLink>
 
                         </div>
 
                     </div>
                 </div>
             </div>
-            
+
             {/* so afeta em tela pequena */}
             <div className=" flex md:hidden flex-col">
 
@@ -100,13 +138,18 @@ export default function TopBar() {
 
                     <div className="flex items-center gap-2 font-bold">
 
-                        <span className="flex h-8 w-8 items-center justify-center rounded-[12px] bg-[#030711] text-[18px] text-white">
-                            S
-                        </span>
+                        <NavLink to="/" className=" flex flex-row gap-2 font-bold">
+                            <span className="flex h-8 w-8 items-center justify-center rounded-[12px] bg-[#030711] text-[18px] text-white">
+                                S
+                            </span>
+                            <span className="text-[20px]">
+                                Style
+                            </span>
+                        </NavLink>
 
-                        <span className="text-[20px]">
-                            Style
-                        </span>
+
+
+
 
                     </div>
 
@@ -123,19 +166,31 @@ export default function TopBar() {
                             />
                         </button>
 
-                        <img
-                            src={Heart}
-                            alt="Favorites"
-                        />
+                        <NavLink
+                            to="/wishlist"
+                            className="flex items-center"
+                        >
+                            <img
+                                src={Heart}
+                                alt="Favorites"
+                            />
+                        </NavLink>
 
                         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f3f4f6] text-[14px]">
                             JD
                         </span>
 
-                        <img
-                            src={ShoppingBag}
-                            alt="Shopping bag"
-                        />
+                        <NavLink to="/carrinho" className="flex mb-2 relative">
+                            <img
+                                src={ShoppingBag}
+                                alt="Shopping bag"
+                            />
+                            {cartCount > 0 && (
+                                <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#030711] text-[11px] font-bold text-white">
+                                    {cartCount}
+                                </span>
+                            )}
+                        </NavLink>
 
                     </div>
 
