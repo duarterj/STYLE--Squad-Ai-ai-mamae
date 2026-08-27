@@ -12,6 +12,7 @@ export function validateRequestBodyData<T>(schema: z.ZodSchema<T>) {
             });
             return;
         }
+        request.body = validate.data;
         next();
     };
 }
@@ -29,16 +30,22 @@ const product = z.object({
         .positive("O preço deve ser maior que zero"),
 
     salePrice: z.coerce.number()
-        .positive("O preço promocional deve ser maior que zero")
+        .nullable()
         .optional(),
-
-    pathImage: z.string().optional(),
 
     category: z.enum(['TOPS', 'BOTTOMS', 'SHOES', 'DRESSES', 'ACCESSORIES']),
 
     collection: z.string().optional(),
 
-    isActive: z.boolean().optional(),
+    isActive: z.preprocess((val) => {
+        if (val === 'true') {
+            return true;
+        }
+        if (val === 'false') {
+            return false;
+        }
+        return val;
+    }, z.boolean()).optional(),
 });
 
 export const ProductValidator = {
