@@ -1,9 +1,10 @@
-import { Router} from "express";
+import { Router } from "express";
 import { UserController } from "../controllers/userController";
 import { ProductController } from "../controllers/productController";
 import { VariantController } from "../controllers/variantController";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
 import { validateRequestBodyData, UserValidator } from "../validate/userValidator";
+import { ProductValidator } from "../validate/productValidator";
 import { WishlistItemController } from '../controllers/wishListController';
 import { CartItemController } from '../controllers/cartItemController';
 import { uploadImage } from "../middlewares/uploadImageMiddleware";
@@ -36,10 +37,10 @@ router.delete('/users/:id/cart/:variantId', AuthMiddleware.execute, CartItemCont
 
 // ############################## PRODUCT ROUTES
 
-router.post("/product", uploadImage, ProductController.createProduct);
+router.post("/product", uploadImage, validateRequestBodyData(ProductValidator.createProduct), ProductController.createProduct);
 router.get("/product/:productId", ProductController.getProductById);
 router.get("/products", ProductController.getProducts);
-router.put("/product/:productId", uploadImage, ProductController.updateProduct);
+router.put("/product/:productId", uploadImage, validateRequestBodyData(ProductValidator.updateProduct), ProductController.updateProduct);
 router.delete("/product/:productId", ProductController.softDeleteProduct);
 
 // ############################## VARIANT ROUTES

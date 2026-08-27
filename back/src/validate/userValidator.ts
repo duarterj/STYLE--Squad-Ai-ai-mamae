@@ -12,6 +12,9 @@ export function validateRequestBodyData<T>(schema: z.ZodSchema<T>) {
             });
             return;
         }
+
+        request.body = validate.data;
+        
         next();
     };
 }
